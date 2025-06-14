@@ -1,19 +1,18 @@
-﻿using acheesporte_locator_app.Dtos.User;
-using acheesporte_locator_app.Interfaces;
+﻿using acheesporte_locator_app.Dtos;
 using acheesporte_locator_app.Helpers;
+using acheesporte_locator_app.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using acheesporte_locator_app.Views;
 
-namespace acheesporte_athlete_app.ViewModels;
+namespace acheesporte_locator_app.ViewModels;
 
 public partial class LoginViewModel : ObservableObject
 {
-    private readonly IUserService _userService;
+    private readonly IUserInterface _userInterface;
 
-    public LoginViewModel(IUserService userService)
+    public LoginViewModel(IUserInterface userService)
     {
-        _userService = userService;
+        _userInterface = userService;
     }
 
     [ObservableProperty]
@@ -44,15 +43,15 @@ public partial class LoginViewModel : ObservableObject
                 return;
             }
 
-            var dto = new LoginRequestDto
+            var dto = new SignInRequestDto
             {
                 Email = Email,
                 Password = Password
             };
 
-            await _userService.SignInUserAsync(dto);
+            await _userInterface.SignInUserAsync(dto);
 
-            var currentUser = await _userService.GetCurrentUserAsync();
+            var currentUser = await _userInterface.GetCurrentUserAsync();
 
             if (currentUser == null)
             {
