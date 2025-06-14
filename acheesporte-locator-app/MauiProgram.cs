@@ -7,6 +7,11 @@ namespace acheesporte_locator_app
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
+            builder.Services.AddHttp
+
+
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
