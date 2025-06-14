@@ -10,13 +10,13 @@ namespace acheesporte_locator_app.ViewModels;
 
 public partial class RegisterViewModel : ObservableObject
 {
-    private readonly IImageService _imageService;
-    private readonly IUserService _userService;
+    private readonly IImageInterface _imageInterface;
+    private readonly IUserInterface _userInterface;
 
-    public RegisterViewModel(IImageService imageService, IUserService userService)
+    public RegisterViewModel(IImageInterface imageService, IUserInterface userService)
     {
-        _imageService = imageService;
-        _userService = userService;
+        _imageInterface = imageService;
+        _userInterface = userService;
     }
 
     [ObservableProperty]
@@ -83,7 +83,7 @@ public partial class RegisterViewModel : ObservableObject
 
         if (file == null) return;
 
-        var response = await _imageService.UploadProfileImageAsync(file);
+        var response = await _imageInterface.UploadProfileImageAsync(file);
         if (!string.IsNullOrEmpty(response?.Image))
         {
             ProfileImageUrl = response.Image;
@@ -114,7 +114,7 @@ public partial class RegisterViewModel : ObservableObject
                 return;
             }
 
-            var dto = new RegisterRequestDto
+            var dto = new SignUpRequestDto
             {
                 FirstName = FirstName,
                 LastName = LastName,
@@ -125,17 +125,17 @@ public partial class RegisterViewModel : ObservableObject
                 ProfileImageUrl = ProfileImageUrl
             };
 
-            await _userService.SignInUpUserAsync(dto);
+            await _userInterface.SignUpUserAsync(dto);
 
-            var loginDto = new LoginRequestDto
+            var loginDto = new SignInRequestDto
             {
                 Email = Email,
                 Password = Password
             };
 
-            await _userService.SignInUserAsync(loginDto);
+            await _userInterface.SignInUserAsync(loginDto);
 
-            var currentUser = await _userService.GetCurrentUserAsync();
+            var currentUser = await _userInterface.GetCurrentUserAsync();
             UserSession.CurrentUser = currentUser;
 
             Application.Current.MainPage = new AppShell();
