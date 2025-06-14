@@ -20,7 +20,7 @@
     <ShellContent Route="RegisterPage" ContentTemplate="{DataTemplate auth:RegisterPage}" />
     <!-- <ShellContent Route="LoadingPage" ContentTemplate="{DataTemplate shared:LoadingPage}" /> -->
 
-    <TabBar Route="MainApp">
+    <!--<TabBar Route="MainApp">
         <ShellContent 
         Title="Início"
         Route="HomePage"
@@ -39,6 +39,6 @@
     Icon="history.png"
     ContentTemplate="{DataTemplate test:TestPage}"/>
 
-    </TabBar>
+    </TabBar> -->
 
 </Shell>

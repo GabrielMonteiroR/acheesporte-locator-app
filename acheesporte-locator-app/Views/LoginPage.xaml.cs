@@ -1,4 +1,3 @@
-using acheesporte_athlete_app.ViewModels;
 using acheesporte_locator_app.ViewModels;
 
 namespace acheesporte_locator_app.Views;
