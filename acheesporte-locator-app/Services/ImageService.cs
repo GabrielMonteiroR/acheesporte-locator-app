@@ -1,8 +1,11 @@
-﻿using System.Text.Json;
+﻿using acheesporte_locator_app.Config;
+using acheesporte_locator_app.Dtos.ImageUploadDtos;
+using acheesporte_locator_app.Interfaces;
+using System.Text.Json;
 
 namespace acheesporte_athlete_app.Services;
 
-public class ImageService : IImageService
+public class ImageService : IImageInterface
 {
     private HttpClient _httpClient;
     private readonly ApiSettings _apiSettings;
