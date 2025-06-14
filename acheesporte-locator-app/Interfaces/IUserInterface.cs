@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using acheesporte_locator_app.Dtos;
 
-namespace acheesporte_locator_app.Interfaces
+namespace acheesporte_locator_app.Interfaces;
+
+public interface IUserInterface
 {
-    public interface IUserInterface
-    {
-        Task
-    }
+    Task<SignInResponseDto> SignInUserAsync(SignInRequestDto requestDto);
 }
