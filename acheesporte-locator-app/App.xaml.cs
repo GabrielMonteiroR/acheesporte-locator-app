@@ -12,8 +12,7 @@ public partial class App : Application
 
         Services = serviceProvider;
 
-        var splash = App.Services.GetService<SplashPage>();
-        MainPage = new NavigationPage(splash);
+        MainPage = new NavigationPage(App.Services.GetService<SplashPage>());
 
     }
 }

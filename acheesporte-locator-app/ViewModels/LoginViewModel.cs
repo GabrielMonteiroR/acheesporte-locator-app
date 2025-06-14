@@ -93,7 +93,8 @@ public partial class LoginViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Erro", ex.Message, "OK");
+            await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+
         }
         finally
         {

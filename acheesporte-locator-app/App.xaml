@@ -12,7 +12,7 @@
             <converters:BoolToSimNaoConverter x:Key="BoolToSimNaoConverter"/>
 
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="#200937"/>
+                <Setter Property="BarBackgroundColor" Value="#121212"/>
                 <Setter Property="BarTextColor" Value="DeepPink"/>
             </Style>
 

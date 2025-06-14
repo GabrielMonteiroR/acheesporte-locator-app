@@ -4,24 +4,15 @@
              xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"
              xmlns:converters="clr-namespace:acheesporte_locator_app.Converters"
              x:Class="acheesporte_locator_app.Views.RegisterPage"
-             NavigationPage.HasBackButton="True">
+             NavigationPage.HasBackButton="True"
+             NavigationPage.BackButtonTitle="Voltar"
+             BackgroundColor="#121212">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:EmptyFieldToColorConverter x:Key="EmptyFieldToColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
-    <ContentPage.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="0,0.85">
-            <GradientStop Color="#200937" Offset="0.0" />
-            <GradientStop Color="#3A1155" Offset="0.3" />
-            <GradientStop Color="#6A1B9A" Offset="0.6" />
-            <GradientStop Color="#8B2BB8" Offset="0.8" />
-            <GradientStop Color="#A75AEF" Offset="0.85" />
-            <GradientStop Color="#F7F8FA" Offset="1.0" />
-        </LinearGradientBrush>
-    </ContentPage.Background>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -76,7 +67,7 @@
 
                     <Button Text="Selecionar Foto"
                             Command="{Binding PickImageCommand}"
-                            BackgroundColor="#200937"
+                            BackgroundColor="Black"
                             TextColor="AliceBlue"
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
@@ -136,7 +127,7 @@
                            BackgroundColor="White" TextColor="#200937" />
 
                     <Button Text="Cadastrar"
-                            BackgroundColor="#200937"
+                            BackgroundColor="Black"
                             TextColor="White"
                             FontAttributes="Bold"
                             CornerRadius="12"

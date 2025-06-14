@@ -15,7 +15,7 @@ public partial class RegisterPage : ContentPage
     private async void StartTypingAnimation()
     {
         var prefix = "Bem-vindo, novo ";
-        var phrases = new List<string> { "Empresário", "Chefe", "Vencedor" };
+        var phrases = new List<string> { "Parceiro", "Empreendedor", "Gestor" };
         var colors = new List<Color> { Colors.DeepPink, Colors.MediumSeaGreen, Colors.DeepSkyBlue };
 
         int index = 0;

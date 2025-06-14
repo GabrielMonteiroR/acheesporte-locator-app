@@ -50,7 +50,8 @@ public partial class SplashPage : ContentPage
         catch
         {
             await Task.Delay(1500);
-            Application.Current.MainPage = App.Services.GetService<LoginPage>();
+            await Navigation.PushAsync(App.Services.GetService<LoginPage>());
+
         }
     }
 }
