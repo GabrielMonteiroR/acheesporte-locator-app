@@ -7,13 +7,11 @@
     xmlns:test="clr-namespace:acheesporte_locator_app.Views"
     xmlns:history="clr-namespace:acheesporte_locator_app.Views"  
 
-    Shell.TabBarBackgroundColor="#200937"  
-    Shell.TabBarForegroundColor="Purple"  
-    Shell.TabBarTitleColor="Purple"  
+    Shell.TabBarBackgroundColor="#121212"  
+    Shell.TabBarForegroundColor="DeepPink"  
+    Shell.TabBarTitleColor="DeepPink"  
     Shell.TabBarUnselectedColor="#CCCCCC"  
-    Shell.TabBarDisabledColor="#888888"  
-    Shell.BackgroundColor="#200937"  
-    Shell.NavBarIsVisible="False">
+    Shell.TabBarDisabledColor="#888888">
 
     <!-- <ShellContent Route="SplashPage" ContentTemplate="{DataTemplate auth:SplashPage}" /> -->
     <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate auth:LoginPage}" />
@@ -30,14 +28,26 @@
         <ShellContent
             Title="Reservas"
             Route="TestPage"
-            Icon="reservations.png"
+            Icon="football.png"
             ContentTemplate="{DataTemplate main:HomePage}"/>
+        
+        <ShellContent
+     Title="Meus locais"
+     Route="TestPage"
+     Icon="stadium.png"
+     ContentTemplate="{DataTemplate main:HomePage}"/>
 
         <ShellContent
     Title="Histórico"
     Route="TestPage"
     Icon="history.png"
     ContentTemplate="{DataTemplate main:HomePage}"/>
+
+        <ShellContent
+     Title="Perfil"
+     Route="TestPage"
+     Icon="user.png"
+     ContentTemplate="{DataTemplate main:HomePage}"/>
 
     </TabBar> 
 
