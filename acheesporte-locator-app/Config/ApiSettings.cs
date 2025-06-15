@@ -26,4 +26,6 @@ public class ApiSettings
 
     [JsonPropertyName("PlacesApiKey")]
     public string PlacesApiKey { get; set; }
+
+    public string VenuesEndpoint { get; set; }
 }
