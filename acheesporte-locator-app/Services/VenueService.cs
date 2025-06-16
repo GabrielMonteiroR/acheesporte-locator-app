@@ -4,6 +4,8 @@ using Microsoft.Maui.Storage;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
+namespace acheesporte_locator_app.Services;
+
 public class VenueService
 {
     private readonly HttpClient _httpClient;
@@ -15,32 +17,31 @@ public class VenueService
         _apiSettings = apiSettings;
     }
 
-    public async Task<bool> CreateVenueAsync(CreateVenueRequestDto request)
+    public async Task<List<VenueResponseDto>> GetAllVenuesAsync()
     {
         try
         {
             var token = await SecureStorage.GetAsync("auth_token");
-            if (string.IsNullOrEmpty(token))
+            if (string.IsNullOrWhiteSpace(token))
                 throw new Exception("Usuário não autenticado. Token não encontrado.");
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var response = await _httpClient.PostAsJsonAsync(
-                $"{_apiSettings.BaseUrl}/{_apiSettings.VenuesEndpoint}", request);
+            var response = await _httpClient.GetAsync($"{_apiSettings.BaseUrl}/{_apiSettings.VenuesEndpoint}");
 
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                return true;
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Erro ao buscar locais: {error}");
             }
-            else
-            {
-                var errorMessage = await response.Content.ReadAsStringAsync();
-                throw new Exception($"Falha ao criar o local: {errorMessage}");
-            }
+
+            var result = await response.Content.ReadFromJsonAsync<VenueListResponseDto>();
+            return result?.Data ?? new List<VenueResponseDto>();
         }
         catch (Exception ex)
         {
-            throw new Exception("Erro ao criar o local.", ex);
+            Console.WriteLine($"Erro: {ex.Message}");
+            throw;
         }
     }
 }

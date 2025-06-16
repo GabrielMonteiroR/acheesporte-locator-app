@@ -28,4 +28,6 @@ public class ApiSettings
     public string PlacesApiKey { get; set; }
 
     public string VenuesEndpoint { get; set; }
+
+    public string VenueImageUploadEndpoint { get; set; }
 }
