@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"
@@ -23,54 +22,68 @@
                    HorizontalOptions="Start" />
         </Grid>
 
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="16" Spacing="16">
+        <Grid Grid.Row="1">
+            <CollectionView ItemsSource="{Binding Venues}"
+                            IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBoolConverter}}"
+                            SelectionMode="None"
+                            Margin="0,10">
+                <CollectionView.EmptyView>
+                    <Label Text="Nenhum local encontrado."
+                           HorizontalOptions="Center"
+                           TextColor="White"
+                           FontAttributes="Italic"
+                           FontSize="14" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#DDD"
+                                StrokeShape="RoundRectangle 12"
+                                Padding="12"
+                                Margin="0,5"
+                                BackgroundColor="Ivory">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="DarkSlateGrey" />
+                                <Label Text="{Binding Address}"
+                                       FontSize="14"
+                                       TextColor="#A6A6A6" />
+                                <Label Text="{Binding VenueTypeName}"
+                                       FontSize="14"
+                                       TextColor="DeepPink" />
+                                <Label Text="{Binding Capacity, StringFormat='Capacidade: {0} pessoas'}"
+                                       FontSize="13"
+                                       TextColor="DarkSlateGrey" />
+                                <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
+                                    <Button Text="Editar"
+                                            BackgroundColor="DimGrey"
+                                            TextColor="White"
+                                            CornerRadius="8"
+                                            WidthRequest="100" />
+                                    <Button Text="Horários"
+                                            BackgroundColor="PaleVioletRed"
+                                            TextColor="White"
+                                            CornerRadius="8"
+                                            WidthRequest="100" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-                <ActivityIndicator  
-                    IsVisible="{Binding IsLoading}"  
-                    IsRunning="{Binding IsLoading}"  
-                    HorizontalOptions="Center"  
-                    Color="#E94560" />
-
-                <Label Text="Nenhum local encontrado."
-                       IsVisible="{Binding IsEmpty}"
-                       HorizontalOptions="Center"
-                       FontAttributes="Italic"
-                       TextColor="#FFFFFF"
-                       FontSize="14" />
-
-                <CollectionView ItemsSource="{Binding Venues}"
-                                IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBoolConverter}}"
-                                SelectionMode="None">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border Stroke="#DDD"
-                                    StrokeShape="RoundRectangle 12"
-                                    Padding="12"
-                                    Margin="0,5"
-                                    BackgroundColor="FloralWhite">
-                                <VerticalStackLayout>
-                                    <Label Text="{Binding Name}"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           TextColor="DarkSlateGrey" />
-                                    <Label Text="{Binding Address}"
-                                           FontSize="14"
-                                           TextColor="#A6A6A6" />
-                                    <Label Text="{Binding VenueTypeName}"
-                                           FontSize="14"
-                                           TextColor="DeepPink" />
-                                    <Label Text="{Binding Capacity, StringFormat='Capacidade: {0} pessoas'}"
-                                           FontSize="13"
-                                           TextColor="DarkSlateGrey" />
-                                </VerticalStackLayout>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
-            </VerticalStackLayout>
-        </ScrollView>
-
+            <Button Text="+"
+                    FontSize="24"
+                    BackgroundColor="DeepPink"
+                    TextColor="White"
+                    CornerRadius="30"
+                    WidthRequest="60"
+                    HeightRequest="60"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="20"
+                    ZIndex="1" />
+        </Grid>
     </Grid>
 </ContentPage>
