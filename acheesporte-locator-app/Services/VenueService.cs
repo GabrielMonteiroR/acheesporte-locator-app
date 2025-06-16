@@ -1,6 +1,5 @@
 ﻿using acheesporte_locator_app.Config;
-using acheesporte_locator_app.Dtos;
-using Microsoft.Maui.Storage;
+using acheesporte_locator_app.Dtos.VenueDtos;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
