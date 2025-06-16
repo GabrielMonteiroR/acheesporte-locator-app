@@ -35,8 +35,14 @@ public static class MauiProgram
         builder.Services.AddTransient<RegisterViewModel>();
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddTransient<SplashPage>();
+        builder.Services.AddTransient<VenueViewModel>();
+        builder.Services.AddTransient<VenueListPage>();
 
-
+        builder.Services.AddHttpClient<VenueService>(client =>
+        {
+            var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
+            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+        });
 
         builder.Services.AddHttpClient<IImageInterface, ImageService>(client =>
         {

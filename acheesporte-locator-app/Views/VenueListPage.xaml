@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"
+             x:Class="acheesporte_locator_app.Views.VenueListPage"
+             x:DataType="viewmodels:VenueViewModel"
+             BackgroundColor="#121212"
+             Shell.NavBarIsVisible="False"
+             Shell.PresentationMode="Animated">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Padding="24,4,4,4" HeightRequest="100">
+            <Label Text="Locais disponíveis"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="DeepPink"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16" Spacing="16">
+
+                <ActivityIndicator  
+                    IsVisible="{Binding IsLoading}"  
+                    IsRunning="{Binding IsLoading}"  
+                    HorizontalOptions="Center"  
+                    Color="#E94560" />
+
+                <Label Text="Nenhum local encontrado."
+                       IsVisible="{Binding IsEmpty}"
+                       HorizontalOptions="Center"
+                       FontAttributes="Italic"
+                       TextColor="#FFFFFF"
+                       FontSize="14" />
+
+                <CollectionView ItemsSource="{Binding Venues}"
+                                IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBoolConverter}}"
+                                SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="#DDD"
+                                    StrokeShape="RoundRectangle 12"
+                                    Padding="12"
+                                    Margin="0,5"
+                                    BackgroundColor="FloralWhite">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Name}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="DarkSlateGrey" />
+                                    <Label Text="{Binding Address}"
+                                           FontSize="14"
+                                           TextColor="#A6A6A6" />
+                                    <Label Text="{Binding VenueTypeName}"
+                                           FontSize="14"
+                                           TextColor="DeepPink" />
+                                    <Label Text="{Binding Capacity, StringFormat='Capacidade: {0} pessoas'}"
+                                           FontSize="13"
+                                           TextColor="DarkSlateGrey" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

@@ -33,9 +33,9 @@
         
         <ShellContent
      Title="Meus locais"
-     Route="TestPage"
+     Route="VenueListPage"
      Icon="stadium.png"
-     ContentTemplate="{DataTemplate main:HomePage}"/>
+     ContentTemplate="{DataTemplate main:VenueListPage}"/>
 
         <ShellContent
     Title="Histórico"
