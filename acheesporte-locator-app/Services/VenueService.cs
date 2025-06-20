@@ -54,5 +54,33 @@ public async Task<List<VenueResponseDto>> GetVenuesByOwnerAsync()
         return new List<VenueResponseDto>();
     }
 }
+    public async Task CreateVenueAsync(CreateVenueRequestDto dto)
+    {
+        try
+        {
+            var authToken = await SecureStorage.GetAsync("auth_token");
+
+            if (string.IsNullOrWhiteSpace(authToken))
+                throw new Exception("Token não encontrado.");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+            var url = $"{_apiSettings.BaseUrl}/{_apiSettings.VenuesEndpoint}"; 
+
+            var response = await _httpClient.PostAsJsonAsync(url, dto);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Erro ao cadastrar local: {content}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao criar local: {ex.Message}");
+            throw;
+        }
+    }
+
 
 }
