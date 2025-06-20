@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /acheesporte-locator-app/appsettings.json
+/acheesporte-locator-app/Platforms/Android/AndroidManifest.xml
