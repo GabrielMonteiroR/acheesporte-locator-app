@@ -30,4 +30,6 @@ public class ApiSettings
     public string VenuesEndpoint { get; set; }
 
     public string VenueImageUploadEndpoint { get; set; }
+
+    public string UploadVenueImagesEndpont { get; set; }
 }
