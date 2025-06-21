@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              x:Class="acheesporte_locator_app.Views.MapSelectPage"
-             Title="MapSelectPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BackgroundColor="#121212"
+             Shell.NavBarIsVisible="True"
+             Shell.BackgroundColor="#121212"
+             Shell.TitleColor="DeepPink"
+             Shell.TabBarIsVisible="False"
+             Shell.ForegroundColor="DeepPink"
+             Title="Selecione seu local">
+
+    <Grid>
+        <maps:Map x:Name="MapControl"
+                  IsShowingUser="true"
+                  MapType="Hybrid"
+                  MapClicked="OnMapClicked" />
+
+        <Button Text="Confirmar Localização"
+                VerticalOptions="End"
+                HorizontalOptions="Fill"
+                Margin="20"
+                Clicked="OnConfirmClicked"
+                BackgroundColor="DeepPink"
+                TextColor="White" />
+    </Grid>
 </ContentPage>

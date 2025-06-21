@@ -1,8 +1,10 @@
 ﻿using acheesporte_locator_app.Dtos.VenueDtos;
 using acheesporte_locator_app.Dtos.VenueTypeDtos;
 using acheesporte_locator_app.Interfaces;
+using acheesporte_locator_app.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
 
 namespace acheesporte_locator_app.ViewModels;
@@ -24,6 +26,9 @@ public partial class VenueFormViewModel : ObservableObject
         _imageService = imageService;
         _viaCepService = viaCepService;
         _venueTypeService = venueTypeService;
+
+        RegisterMessages(); 
+
 
         ImageUrls = new ObservableCollection<string>();
         VenueTypes = new ObservableCollection<VenueTypeResponseDto>();
@@ -47,8 +52,6 @@ public partial class VenueFormViewModel : ObservableObject
     [ObservableProperty] private int ownerId;
     [ObservableProperty] private ObservableCollection<string> imageUrls;
     [ObservableProperty] private bool isLoading;
-
-    // Picker de tipos de local
     [ObservableProperty] private ObservableCollection<VenueTypeResponseDto> venueTypes;
     [ObservableProperty] private VenueTypeResponseDto selectedVenueType;
 
@@ -185,5 +188,13 @@ public partial class VenueFormViewModel : ObservableObject
         {
             IsLoading = false;
         }
+    }
+    private void RegisterMessages()
+    {
+        WeakReferenceMessenger.Default.Register<LocationSelectedMessage>(this, (r, m) =>
+        {
+            Latitude = m.Location.Latitude;
+            Longitude = m.Location.Longitude;
+        });
     }
 }

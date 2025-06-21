@@ -39,6 +39,7 @@ public static class MauiProgram
         builder.Services.AddTransient<VenueListPage>();
         builder.Services.AddTransient<VenueFormViewModel>();
         builder.Services.AddTransient<VenueRegisterPage>();
+        builder.Services.AddTransient<MapSelectPage>();
 
         builder.Services.AddHttpClient<VenueService>(client =>
         {
@@ -79,6 +80,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
              .UseMauiCommunityToolkit()
+             .UseMauiMaps()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
