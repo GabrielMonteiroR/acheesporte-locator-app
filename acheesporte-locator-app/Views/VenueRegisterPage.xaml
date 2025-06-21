@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"
              x:Class="acheesporte_locator_app.Views.VenueRegisterPage"
-             x:DataType="viewmodels:VenueRegisterViewModel"
+             x:DataType="viewmodels:VenueFormViewModel"
              BackgroundColor="#121212"
              Shell.NavBarIsVisible="True"
              Shell.BackgroundColor="#121212"
@@ -78,13 +78,14 @@
                     BackgroundColor="#1E1E1E"
                     TextColor="White" />
 
-            <!-- Tipo de local -->
-            <Label Text="Tipo de Local (ID)" TextColor="#CCCCCC" />
-            <Entry Placeholder="Ex: 1"
-                   Text="{Binding VenueTypeId}"
-                   Keyboard="Numeric"
-                   BackgroundColor="#1E1E1E"
-                   TextColor="White" />
+            <!-- Tipo de local (Picker) -->
+            <Label Text="Tipo de Local" TextColor="#CCCCCC" />
+            <Picker ItemsSource="{Binding VenueTypes}"
+        ItemDisplayBinding="{Binding Name}"
+        SelectedItem="{Binding SelectedVenueType}"
+        BackgroundColor="#1E1E1E"
+        TextColor="White"
+        Title="Selecione o tipo de local" />
 
             <!-- Localização -->
             <Button Text="Selecionar Localização no Mapa"

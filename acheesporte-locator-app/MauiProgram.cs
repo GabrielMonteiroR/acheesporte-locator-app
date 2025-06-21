@@ -37,7 +37,7 @@ public static class MauiProgram
         builder.Services.AddTransient<SplashPage>();
         builder.Services.AddTransient<VenueViewModel>();
         builder.Services.AddTransient<VenueListPage>();
-        builder.Services.AddTransient<VenueRegisterViewModel>();
+        builder.Services.AddTransient<VenueFormViewModel>();
         builder.Services.AddTransient<VenueRegisterPage>();
 
         builder.Services.AddHttpClient<VenueService>(client =>
@@ -51,6 +51,12 @@ public static class MauiProgram
             var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
             client.BaseAddress = new Uri(apiSettings.BaseUrl);
         });
+
+        builder.Services.AddHttpClient<IVenueTypeService, VenueTypeService>(client =>
+        {
+            var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
+            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+        }); 
 
         builder.Services.AddHttpClient<ICepService, CepService>(client =>
         {

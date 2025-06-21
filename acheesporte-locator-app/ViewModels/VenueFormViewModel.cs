@@ -1,4 +1,5 @@
 ﻿using acheesporte_locator_app.Dtos.VenueDtos;
+using acheesporte_locator_app.Dtos.VenueTypeDtos;
 using acheesporte_locator_app.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -6,19 +7,26 @@ using System.Collections.ObjectModel;
 
 namespace acheesporte_locator_app.ViewModels;
 
-public partial class VenueRegisterViewModel : ObservableObject
+public partial class VenueFormViewModel : ObservableObject
 {
     private readonly IVenueService _venueService;
     private readonly IImageInterface _imageService;
     private readonly ICepService _viaCepService;
+    private readonly IVenueTypeService _venueTypeService;
 
-    public VenueRegisterViewModel(IVenueService venueService, IImageInterface imageService, ICepService viaCepService)
+    public VenueFormViewModel(
+        IVenueService venueService,
+        IImageInterface imageService,
+        ICepService viaCepService,
+        IVenueTypeService venueTypeService)
     {
         _venueService = venueService;
         _imageService = imageService;
         _viaCepService = viaCepService;
+        _venueTypeService = venueTypeService;
 
         ImageUrls = new ObservableCollection<string>();
+        VenueTypes = new ObservableCollection<VenueTypeResponseDto>();
     }
 
     // Campos do formulário
@@ -37,10 +45,48 @@ public partial class VenueRegisterViewModel : ObservableObject
     [ObservableProperty] private string rules;
     [ObservableProperty] private int venueTypeId;
     [ObservableProperty] private int ownerId;
-
     [ObservableProperty] private ObservableCollection<string> imageUrls;
-
     [ObservableProperty] private bool isLoading;
+
+    // Picker de tipos de local
+    [ObservableProperty] private ObservableCollection<VenueTypeResponseDto> venueTypes;
+    [ObservableProperty] private VenueTypeResponseDto selectedVenueType;
+
+    partial void OnSelectedVenueTypeChanged(VenueTypeResponseDto value)
+    {
+        if (value != null)
+            VenueTypeId = value.Id;
+    }
+
+    [RelayCommand]
+    public async Task LoadVenueTypesAsync()
+    {
+        try
+        {
+            IsLoading = true;
+
+            var result = await _venueTypeService.GetVenueTypesAsync();
+            VenueTypes.Clear();
+
+            foreach (var type in result)
+                VenueTypes.Add(type);
+
+            if (VenueTypes.Count == 0)
+            {
+                await Shell.Current.DisplayAlert("Aviso", "Nenhum tipo de local encontrado.", "OK");
+
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Erro", $"Erro ao carregar tipos de local: {ex.Message}", "OK");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
 
     [RelayCommand]
     public async Task SelecionarImagensAsync()
@@ -58,10 +104,9 @@ public partial class VenueRegisterViewModel : ObservableObject
             var files = result.ToList();
             var upload = await _imageService.UploadVenuesImageAsync(files);
             ImageUrls.Clear();
+
             foreach (var image in upload.Select(i => i.Image))
-            {
                 ImageUrls.Add(image);
-            }
         }
         catch (Exception ex)
         {
@@ -80,13 +125,13 @@ public partial class VenueRegisterViewModel : ObservableObject
 
         try
         {
-            var Adress = await _viaCepService.GetAddressByCepAsync(PostalCode);
-            if (Adress != null)
+            var address = await _viaCepService.GetAddressByCepAsync(PostalCode);
+            if (address != null)
             {
-                Street = Adress.Street;
-                Neighborhood = Adress.Neighborhood;
-                City = Adress.City;
-                State = Adress.State;
+                Street = address.Street;
+                Neighborhood = address.Neighborhood;
+                City = address.City;
+                State = address.State;
             }
         }
         catch
@@ -98,7 +143,7 @@ public partial class VenueRegisterViewModel : ObservableObject
     [RelayCommand]
     public async Task SelectLocationOnMap()
     {
-       await Shell.Current.GoToAsync("MapSelectPage", true);
+        await Shell.Current.GoToAsync("MapSelectPage", true);
     }
 
     [RelayCommand]

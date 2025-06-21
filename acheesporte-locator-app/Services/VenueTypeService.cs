@@ -1,11 +1,11 @@
 ﻿using acheesporte_locator_app.Config;
 using acheesporte_locator_app.Dtos.VenueTypeDtos;
-using Microsoft.Extensions.Configuration;
+using acheesporte_locator_app.Interfaces;
 using System.Net.Http.Json;
 
 namespace acheesporte_locator_app.Services;
 
-public class VenueTypeService
+public class VenueTypeService : IVenueTypeService
 {
     private readonly HttpClient _httpClient;
     private readonly ApiSettings _apiSettings;
@@ -20,18 +20,33 @@ public class VenueTypeService
     {
         try
         {
-            var response = await _httpClient.GetFromJsonAsync<VenueTypeListResponse>($"{_apiSettings.BaseUrl}{_apiSettings.VenueTypeEndpoint}");
-            return response?.VenueTypesList ?? new();
-        }
-        catch (HttpRequestException ex)
-        {
-            Console.WriteLine($"An error occurred while fetching venue types: {ex.Message}");
-            return new List<VenueTypeResponseDto>();
+            var token = await SecureStorage.GetAsync("auth_token");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                await Shell.Current.DisplayAlert("Erro", "Token de autenticação não encontrado.", "OK");
+                return new();
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiSettings.BaseUrl}{_apiSettings.VenueTypeEndpoint}");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.SendAsync(request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                await Shell.Current.DisplayAlert("Erro", $"Erro ao buscar tipos: {response.StatusCode}\n{content}", "OK");
+                return new();
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<VenueTypeListResponse>();
+            return result?.VenueTypesList ?? new();
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
-            return new List<VenueTypeResponseDto>();
+            await Shell.Current.DisplayAlert("Erro", $"Erro inesperado: {ex.Message}", "OK");
+            return new();
         }
     }
 }

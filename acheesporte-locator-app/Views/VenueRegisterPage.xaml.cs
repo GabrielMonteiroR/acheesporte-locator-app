@@ -4,9 +4,18 @@ namespace acheesporte_locator_app.Views;
 
 public partial class VenueRegisterPage : ContentPage
 {
-    public VenueRegisterPage(VenueRegisterViewModel viewModel)
+    private readonly VenueFormViewModel _viewModel;
+
+    public VenueRegisterPage(VenueFormViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = viewModel;
+        BindingContext = _viewModel = viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        await _viewModel.LoadVenueTypesAsync();
     }
 }
