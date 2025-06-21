@@ -1,0 +1,62 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"
+             x:Class="acheesporte_locator_app.Views.VenueRegisterPage"
+             x:DataType="viewmodels:VenueRegisterViewModel"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+
+            <Label Text="Cadastrar Local" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <Entry Placeholder="Nome do Local" Text="{Binding Name}" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Entry Placeholder="CEP" WidthRequest="200" Text="{Binding PostalCode}" Keyboard="Numeric"/>
+                <Button Text="Buscar" Command="{Binding FindAddressByPostalCodeCommand}" />
+            </HorizontalStackLayout>
+
+            <Entry Placeholder="Rua" Text="{Binding Street}" />
+            <Entry Placeholder="Número" Text="{Binding Number}" />
+            <Entry Placeholder="Complemento" Text="{Binding Complement}" />
+            <Entry Placeholder="Bairro" Text="{Binding Neighborhood}" />
+            <Entry Placeholder="Cidade" Text="{Binding City}" />
+            <Entry Placeholder="Estado" Text="{Binding State}" />
+
+            <Editor Placeholder="Descrição" Text="{Binding Description}" AutoSize="TextChanges" />
+
+            <Entry Placeholder="Capacidade" Keyboard="Numeric" Text="{Binding Capacity}" />
+
+            <Editor Placeholder="Regras do local" Text="{Binding Rules}" AutoSize="TextChanges" />
+
+            <Entry Placeholder="ID do Tipo de Local" Keyboard="Numeric" Text="{Binding VenueTypeId}" />
+
+            <Button Text="Selecionar Localização no Mapa" Command="{Binding SelectLocationOnMapCommand}" />
+
+            <Label Text="Latitude" />
+            <Entry Text="{Binding Latitude}" IsReadOnly="True" />
+            <Label Text="Longitude" />
+            <Entry Text="{Binding Longitude}" IsReadOnly="True" />
+
+            <Button Text="Selecionar Imagens" Command="{Binding SelecionarImagensCommand}" />
+            <CollectionView ItemsSource="{Binding ImageUrls}" HeightRequest="100">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame WidthRequest="100" HeightRequest="100" Padding="2" Margin="4">
+                            <Image Source="{Binding .}" Aspect="AspectFill"/>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Cadastrar Local" Command="{Binding RegisterVenueCommand}" BackgroundColor="Green" TextColor="White" />
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="DarkGray"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
