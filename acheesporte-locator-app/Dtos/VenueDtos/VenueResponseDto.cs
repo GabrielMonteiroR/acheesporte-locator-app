@@ -10,8 +10,26 @@ public class VenueResponseDto
     [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonPropertyName("address")]
-    public string Address { get; set; }
+    [JsonPropertyName("street")]
+    public string Street { get; set; }
+
+    [JsonPropertyName("number")]
+    public string Number { get; set; }
+
+    [JsonPropertyName("complement")]
+    public string Complement { get; set; }
+
+    [JsonPropertyName("neighborhood")]
+    public string Neighborhood { get; set; }
+
+    [JsonPropertyName("city")]
+    public string City { get; set; }
+
+    [JsonPropertyName("state")]
+    public string State { get; set; }
+
+    [JsonPropertyName("postal_code")]
+    public string PostalCode { get; set; }
 
     [JsonPropertyName("capacity")]
     public int Capacity { get; set; }
@@ -51,4 +69,7 @@ public class VenueResponseDto
 
     [JsonPropertyName("venue_avaliability_times")]
     public List<VenueAvailabilityTimeDto> VenueAvailabilityTimes { get; set; }
+
+    [JsonIgnore]
+    public string Address => $"{Street}, {Number} - {Neighborhood}, {City} - {State}";
 }

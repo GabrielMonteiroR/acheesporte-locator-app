@@ -50,4 +50,11 @@ public partial class VenueViewModel : ObservableObject
             IsLoading = false;
         }
     }
+
+    [RelayCommand]
+    public async Task NavigateToVenueRegisterAsync()
+    {
+        await Shell.Current.GoToAsync("VenueRegisterPage");
+    }
+
 }

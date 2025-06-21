@@ -38,7 +38,7 @@ public static class MauiProgram
         builder.Services.AddTransient<VenueViewModel>();
         builder.Services.AddTransient<VenueListPage>();
         builder.Services.AddTransient<VenueRegisterViewModel>();
-        builder.Services.AddTransient<VenueRegisterViewModel>();
+        builder.Services.AddTransient<VenueRegisterPage>();
 
         builder.Services.AddHttpClient<VenueService>(client =>
         {

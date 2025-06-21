@@ -7,7 +7,7 @@ using System.Net.Http.Json;
 
 namespace acheesporte_locator_app.Services;
 
-public class VenueService
+public class VenueService : IVenueService
 {
     private readonly HttpClient _httpClient;
     private readonly ApiSettings _apiSettings;

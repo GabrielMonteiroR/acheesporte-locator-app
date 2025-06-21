@@ -1,62 +1,136 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"
              x:Class="acheesporte_locator_app.Views.VenueRegisterPage"
              x:DataType="viewmodels:VenueRegisterViewModel"
-             BackgroundColor="{DynamicResource PageBackgroundColor}">
+             BackgroundColor="#121212"
+             Shell.NavBarIsVisible="True"
+             Shell.BackgroundColor="#121212"
+             Shell.TitleColor="DeepPink"
+             Shell.ForegroundColor="DeepPink"
+             Title="Cadastrar novo Local"
+             Shell.TabBarIsVisible="False">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="12">
+        <VerticalStackLayout Padding="20" Spacing="16">
 
-            <Label Text="Cadastrar Local" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <!-- Nome -->
+            <Label Text="Nome do Local" TextColor="#CCCCCC" />
+            <Entry Placeholder="Ex: Arena Society"
+                   Text="{Binding Name}"
+                   BackgroundColor="#1E1E1E"
+                   TextColor="White" />
 
-            <Entry Placeholder="Nome do Local" Text="{Binding Name}" />
-
+            <!-- CEP + Buscar -->
+            <Label Text="CEP" TextColor="#CCCCCC" />
             <HorizontalStackLayout Spacing="10">
-                <Entry Placeholder="CEP" WidthRequest="200" Text="{Binding PostalCode}" Keyboard="Numeric"/>
-                <Button Text="Buscar" Command="{Binding FindAddressByPostalCodeCommand}" />
+                <Entry Placeholder="00000-000"
+                       Text="{Binding PostalCode}"
+                       WidthRequest="180"
+                       Keyboard="Numeric"
+                       BackgroundColor="#1E1E1E"
+                       TextColor="White" />
+                <Button Text="Buscar"
+                        Command="{Binding FindAddressByPostalCodeCommand}"
+                        BackgroundColor="DeepPink"
+                        TextColor="White"
+                        CornerRadius="8" />
             </HorizontalStackLayout>
 
-            <Entry Placeholder="Rua" Text="{Binding Street}" />
-            <Entry Placeholder="Número" Text="{Binding Number}" />
-            <Entry Placeholder="Complemento" Text="{Binding Complement}" />
-            <Entry Placeholder="Bairro" Text="{Binding Neighborhood}" />
-            <Entry Placeholder="Cidade" Text="{Binding City}" />
-            <Entry Placeholder="Estado" Text="{Binding State}" />
+            <!-- Endereço -->
+            <Label Text="Rua" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Street}" Placeholder="Rua" BackgroundColor="#1E1E1E" TextColor="White"/>
 
-            <Editor Placeholder="Descrição" Text="{Binding Description}" AutoSize="TextChanges" />
+            <Label Text="Bairro" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Neighborhood}" Placeholder="Bairro" BackgroundColor="#1E1E1E" TextColor="White"/>
 
-            <Entry Placeholder="Capacidade" Keyboard="Numeric" Text="{Binding Capacity}" />
+            <Label Text="Cidade" TextColor="#CCCCCC" />
+            <Entry Text="{Binding City}" Placeholder="Cidade" BackgroundColor="#1E1E1E" TextColor="White"/>
 
-            <Editor Placeholder="Regras do local" Text="{Binding Rules}" AutoSize="TextChanges" />
+            <Label Text="Número" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Number}" Placeholder="Número" BackgroundColor="#1E1E1E" TextColor="White"/>
 
-            <Entry Placeholder="ID do Tipo de Local" Keyboard="Numeric" Text="{Binding VenueTypeId}" />
+            <Label Text="Complemento" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Complement}" Placeholder="Complemento" BackgroundColor="#1E1E1E" TextColor="White"/>
 
-            <Button Text="Selecionar Localização no Mapa" Command="{Binding SelectLocationOnMapCommand}" />
+           
 
-            <Label Text="Latitude" />
-            <Entry Text="{Binding Latitude}" IsReadOnly="True" />
-            <Label Text="Longitude" />
-            <Entry Text="{Binding Longitude}" IsReadOnly="True" />
+            <Label Text="Estado" TextColor="#CCCCCC" />
+            <Entry Text="{Binding State}" Placeholder="Estado" BackgroundColor="#1E1E1E" TextColor="White"/>
 
-            <Button Text="Selecionar Imagens" Command="{Binding SelecionarImagensCommand}" />
+            <!-- Descrição -->
+            <Label Text="Descrição" TextColor="#CCCCCC" />
+            <Editor Placeholder="Ex: Quadra com grama sintética e iluminação noturna"
+                    Text="{Binding Description}"
+                    AutoSize="TextChanges"
+                    BackgroundColor="#1E1E1E"
+                    TextColor="White" />
+
+            <!-- Capacidade -->
+            <Label Text="Capacidade (nº de pessoas)" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Capacity}" Keyboard="Numeric" BackgroundColor="#1E1E1E" TextColor="White"/>
+
+            <!-- Regras -->
+            <Label Text="Regras do Local" TextColor="#CCCCCC" />
+            <Editor Text="{Binding Rules}"
+                    Placeholder="Ex: Obrigatório uso de tênis"
+                    AutoSize="TextChanges"
+                    BackgroundColor="#1E1E1E"
+                    TextColor="White" />
+
+            <!-- Tipo de local -->
+            <Label Text="Tipo de Local (ID)" TextColor="#CCCCCC" />
+            <Entry Placeholder="Ex: 1"
+                   Text="{Binding VenueTypeId}"
+                   Keyboard="Numeric"
+                   BackgroundColor="#1E1E1E"
+                   TextColor="White" />
+
+            <!-- Localização -->
+            <Button Text="Selecionar Localização no Mapa"
+                    Command="{Binding SelectLocationOnMapCommand}"
+                    BackgroundColor="#3730A3"
+                    TextColor="White"
+                    CornerRadius="8" />
+
+            <Label Text="Latitude" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Latitude}" IsReadOnly="True" BackgroundColor="#1E1E1E" TextColor="White"/>
+
+            <Label Text="Longitude" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Longitude}" IsReadOnly="True" BackgroundColor="#1E1E1E" TextColor="White"/>
+
+            <!-- Imagens -->
+            <Button Text="Selecionar Imagens"
+                    Command="{Binding SelecionarImagensCommand}"
+                    BackgroundColor="#555"
+                    TextColor="White"
+                    CornerRadius="8" />
+
             <CollectionView ItemsSource="{Binding ImageUrls}" HeightRequest="100">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"/>
+                    <LinearItemsLayout Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame WidthRequest="100" HeightRequest="100" Padding="2" Margin="4">
-                            <Image Source="{Binding .}" Aspect="AspectFill"/>
+                        <Frame WidthRequest="100" HeightRequest="100" Padding="2" Margin="4" HasShadow="False" BackgroundColor="#1E1E1E">
+                            <Image Source="{Binding .}" Aspect="AspectFill" />
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Cadastrar Local" Command="{Binding RegisterVenueCommand}" BackgroundColor="Green" TextColor="White" />
+            <!-- Botão de Cadastrar -->
+            <Button Text="Cadastrar Local"
+                    Command="{Binding RegisterVenueCommand}"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    CornerRadius="12"
+                    FontAttributes="Bold"
+                    HeightRequest="50" />
 
-            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="DarkGray"/>
+            <!-- Loading -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="White" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

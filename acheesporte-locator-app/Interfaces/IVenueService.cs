@@ -5,6 +5,6 @@ namespace acheesporte_locator_app.Interfaces;
 public interface IVenueService
 {
     Task<List<VenueResponseDto>> GetVenuesByOwnerAsync();
-    Task<VenueResponseDto> CreateVenueAsync(CreateVenueRequestDto dto);
+    Task CreateVenueAsync(CreateVenueRequestDto dto);
 
 }
