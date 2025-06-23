@@ -95,5 +95,32 @@ public async Task<List<VenueResponseDto>> GetVenuesByOwnerAsync()
         }
     }
 
+    public async Task UpdateVenueAsync(int venueId, UpdateVenueRequestDto dto)
+    {
+        try
+        {
+            var authToken = await SecureStorage.GetAsync("auth_token");
+
+            if (string.IsNullOrWhiteSpace(authToken))
+                throw new Exception("Token não encontrado.");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+            var url = $"{_apiSettings.BaseUrl}{_apiSettings.UpdateVenueEndpoint}{venueId}";
+
+            var response = await _httpClient.PutAsJsonAsync(url, dto);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Erro ao atualizar local: {responseContent}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao atualizar local: {ex.Message}");
+            throw;
+        }
+    }
 
 }
