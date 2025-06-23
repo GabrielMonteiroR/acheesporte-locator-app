@@ -58,11 +58,14 @@
                                        TextColor="DarkSlateGrey" />
 
                                 <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
-                                    <Button Text="Editar"  
-                                            BackgroundColor="DimGrey"  
-                                            TextColor="White"  
-                                            CornerRadius="8"  
-                                            WidthRequest="100" />
+                                    <Button Text="Editar"
+        BackgroundColor="DimGrey"
+        TextColor="White"
+        CornerRadius="8"
+        WidthRequest="100"
+        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:VenueViewModel}}, Path=NavigateToEditVenueCommand}"
+        CommandParameter="{Binding .}" />
+
                                     <Button Text="Horários"  
                                             BackgroundColor="PaleVioletRed"  
                                             TextColor="White"  
