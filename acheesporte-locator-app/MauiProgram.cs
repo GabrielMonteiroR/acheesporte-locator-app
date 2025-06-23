@@ -35,10 +35,43 @@ public static class MauiProgram
         builder.Services.AddTransient<RegisterViewModel>();
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddTransient<SplashPage>();
+        builder.Services.AddTransient<VenueViewModel>();
+        builder.Services.AddTransient<VenueListPage>();
+        builder.Services.AddTransient<VenueFormViewModel>();
+        builder.Services.AddTransient<VenueRegisterPage>();
+        builder.Services.AddTransient<MapSelectPage>();
 
+        builder.Services.AddHttpClient<VenueService>(client =>
+        {
+            var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
+            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+        });
 
+        builder.Services.AddHttpClient<IVenueService, VenueService>(client =>
+        {
+            var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
+            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+        });
+
+        builder.Services.AddHttpClient<IVenueTypeService, VenueTypeService>(client =>
+        {
+            var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
+            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+        }); 
+
+        builder.Services.AddHttpClient<ICepService, CepService>(client =>
+        {
+            var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
+            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+        });
 
         builder.Services.AddHttpClient<IImageInterface, ImageService>(client =>
+        {
+            var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
+            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+        });
+
+        builder.Services.AddHttpClient<GooglePlacesService>(client =>
         {
             var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
             client.BaseAddress = new Uri(apiSettings.BaseUrl);
@@ -53,6 +86,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
              .UseMauiCommunityToolkit()
+             .UseMauiMaps()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

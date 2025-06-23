@@ -1,0 +1,129 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"  
+             x:Class="acheesporte_locator_app.Views.VenueRegisterPage"  
+             x:DataType="viewmodels:VenueFormViewModel"  
+             BackgroundColor="#121212"  
+             Shell.NavBarIsVisible="True"  
+             Shell.BackgroundColor="#121212"  
+             Shell.TitleColor="DeepPink"  
+             Shell.ForegroundColor="DeepPink"  
+             Title="Cadastrar novo Local"  
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <!-- Nome -->
+            <Label Text="Nome do Local" TextColor="#CCCCCC" />
+            <Entry Placeholder="Ex: Arena Society"  
+                   Text="{Binding Name}"  
+                   BackgroundColor="AliceBlue"  
+                   TextColor="DarkSlateGrey" />
+
+            <!-- CEP + Buscar -->
+            <Label Text="CEP" TextColor="#CCCCCC" />
+            <Entry Placeholder="00000000"
+       Text="{Binding PostalCode, Mode=TwoWay}"
+       TextChanged="OnPostalCodeChanged"
+       Keyboard="Numeric"
+       MaxLength="8"
+       BackgroundColor="AliceBlue"
+       TextColor="DarkSlateGrey" />
+
+
+
+            <!-- Endereço -->
+            <Label Text="Rua" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Street}" Placeholder="Rua" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
+
+            <Label Text="Bairro" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Neighborhood}" Placeholder="Bairro" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
+
+            <Label Text="Cidade" TextColor="#CCCCCC" />
+            <Entry Text="{Binding City}" Placeholder="Cidade" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
+
+            <Label Text="Número" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Number}" Placeholder="Número" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
+
+            <Label Text="Complemento" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Complement}" Placeholder="Complemento" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
+
+            <Label Text="Estado" TextColor="#CCCCCC" />
+            <Entry Text="{Binding State}" Placeholder="Estado" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
+
+            <!-- Descrição -->
+            <Label Text="Descrição" TextColor="#CCCCCC" />
+            <Editor Placeholder="Ex: Quadra com grama sintética e iluminação noturna"  
+                    Text="{Binding Description}"  
+                    AutoSize="TextChanges"  
+                    BackgroundColor="AliceBlue"  
+                    TextColor="DarkSlateGrey" />
+
+            <!-- Capacidade -->
+            <Label Text="Capacidade (nº de pessoas)" TextColor="#CCCCCC" />
+            <Entry Text="{Binding Capacity}" Keyboard="Numeric" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
+
+            <!-- Regras -->
+            <Label Text="Regras do Local" TextColor="#CCCCCC" />
+            <Editor Text="{Binding Rules}"  
+                    Placeholder="Ex: Obrigatório uso de tênis"  
+                    AutoSize="TextChanges"  
+                    BackgroundColor="AliceBlue"  
+                    TextColor="DarkSlateGrey" />
+
+            <!-- Tipo de local (Picker) -->
+            <Label Text="Tipo de Local" TextColor="#CCCCCC" />
+            <Picker ItemsSource="{Binding VenueTypes}"  
+                    ItemDisplayBinding="{Binding Name}"  
+                    SelectedItem="{Binding SelectedVenueType}"  
+                    BackgroundColor="AliceBlue"  
+                    TextColor="DarkSlateGrey"  
+                    Title="Selecione o tipo de local" />
+
+            <!-- Localização -->
+            <Button Text="Selecionar Localização no Mapa"  
+                    Command="{Binding SelectLocationOnMapCommand}"  
+                    BackgroundColor="#3730A3"  
+                    TextColor="White"  
+                    CornerRadius="8" />
+
+            <!-- Imagens -->
+            <Button Text="Selecionar Imagens"  
+                    Command="{Binding SelecionarImagensCommand}"  
+                    BackgroundColor="#555"  
+                    TextColor="White"  
+                    CornerRadius="8" />
+
+            <CollectionView ItemsSource="{Binding ImageUrls}" HeightRequest="100">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame WidthRequest="100" HeightRequest="100" Padding="2" Margin="4" HasShadow="False" BackgroundColor="#1E1E1E">
+                            <Image Aspect="AspectFill">
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding .}" CachingEnabled="False" />
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Botão de Cadastrar -->
+            <Button Text="Cadastrar Local"  
+                    Command="{Binding RegisterVenueCommand}"  
+                    BackgroundColor="Green"  
+                    TextColor="White"  
+                    CornerRadius="12"  
+                    FontAttributes="Bold"  
+                    HeightRequest="50" />
+
+            <!-- Loading -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="White" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
