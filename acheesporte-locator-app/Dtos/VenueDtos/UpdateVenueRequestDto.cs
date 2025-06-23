@@ -5,47 +5,47 @@ namespace acheesporte_locator_app.Dtos.VenueDtos;
 public class UpdateVenueRequestDto
 {
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("street")]
-    public string Street { get; set; }
+    public string? Street { get; set; }
 
     [JsonPropertyName("number")]
-    public string Number { get; set; }
+    public string? Number { get; set; }
 
     [JsonPropertyName("complement")]
-    public string Complement { get; set; }
+    public string? Complement { get; set; }
 
     [JsonPropertyName("neighborhood")]
-    public string Neighborhood { get; set; }
+    public string? Neighborhood { get; set; }
 
     [JsonPropertyName("city")]
-    public string City { get; set; }
+    public string? City { get; set; }
 
     [JsonPropertyName("state")]
-    public string State { get; set; }
+    public string? State { get; set; }
 
     [JsonPropertyName("postal_code")]
-    public string PostalCode { get; set; }
+    public string? PostalCode { get; set; }
 
     [JsonPropertyName("latitude")]
-    public double Latitude { get; set; }
+    public double? Latitude { get; set; }
 
     [JsonPropertyName("longitude")]
-    public double Longitude { get; set; }
+    public double? Longitude { get; set; }
 
     [JsonPropertyName("description")]
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
     [JsonPropertyName("capacity")]
-    public int Capacity { get; set; }
+    public int? Capacity { get; set; }
 
     [JsonPropertyName("rules")]
-    public string Rules { get; set; }
+    public string? Rules { get; set; }
 
     [JsonPropertyName("venue_type_id")]
-    public int VenueTypeId { get; set; }
+    public int? VenueTypeId { get; set; }
 
     [JsonPropertyName("image_urls")]
-    public List<string> ImageUrls { get; set; }
+    public List<string>? ImageUrls { get; set; }
 }

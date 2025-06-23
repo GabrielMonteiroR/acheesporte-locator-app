@@ -65,9 +65,8 @@ public partial class VenueViewModel : ObservableObject
 
         await Shell.Current.GoToAsync(nameof(VenueEditPage), true, new Dictionary<string, object>
     {
-        { "Venue", venue }
+        { "venueId", venue.Id }
     });
     }
-
 
 }

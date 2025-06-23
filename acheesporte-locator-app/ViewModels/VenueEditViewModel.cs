@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace acheesporte_locator_app.ViewModels;
 
-[QueryProperty(nameof(Venue), "venue")]
+[QueryProperty(nameof(VenueId), "venueId")]
 public partial class VenueEditViewModel : ObservableObject
 {
     private readonly IVenueService _venueService;
@@ -16,13 +16,11 @@ public partial class VenueEditViewModel : ObservableObject
     {
         _venueService = venueService;
         _imageService = imageService;
-
         ImageUrls = new ObservableCollection<string>();
     }
-    [ObservableProperty]
-    private VenueResponseDto venue;
 
     [ObservableProperty] private int venueId;
+
     [ObservableProperty] private string name;
     [ObservableProperty] private string street;
     [ObservableProperty] private string number;
@@ -40,32 +38,48 @@ public partial class VenueEditViewModel : ObservableObject
     [ObservableProperty] private ObservableCollection<string> imageUrls;
     [ObservableProperty] private bool isLoading;
 
-    partial void OnVenueChanged(VenueResponseDto value)
+    partial void OnVenueIdChanged(int value)
     {
-        if (value != null)
-        {
-            LoadFromVenue(value);
-        }
+        _ = LoadVenueByIdAsync(value);
     }
 
-    public void LoadFromVenue(VenueResponseDto venue)
+    private async Task LoadVenueByIdAsync(int id)
     {
-        VenueId = venue.Id;
-        Name = venue.Name;
-        Street = venue.Street;
-        Number = venue.Number;
-        Complement = venue.Complement;
-        Neighborhood = venue.Neighborhood;
-        City = venue.City;
-        State = venue.State;
-        PostalCode = venue.PostalCode;
-        Latitude = venue.Latitude;
-        Longitude = venue.Longitude;
-        Description = venue.Description;
-        Capacity = venue.Capacity;
-        Rules = venue.Rules;
-        VenueTypeId = venue.VenueTypeId;
-        ImageUrls = new ObservableCollection<string>(venue.ImageUrls);
+        try
+        {
+            IsLoading = true;
+
+            var venue = await _venueService.GetVenueByIdAsync(id);
+            if (venue == null)
+            {
+                await Shell.Current.DisplayAlert("Erro", "Local não encontrado.", "OK");
+                return;
+            }
+
+            Name = venue.Name;
+            Street = venue.Street;
+            Number = venue.Number;
+            Complement = venue.Complement;
+            Neighborhood = venue.Neighborhood;
+            City = venue.City;
+            State = venue.State;
+            PostalCode = venue.PostalCode;
+            Latitude = venue.Latitude;
+            Longitude = venue.Longitude;
+            Description = venue.Description;
+            Capacity = venue.Capacity;
+            Rules = venue.Rules;
+            VenueTypeId = venue.VenueTypeId;
+            ImageUrls = new ObservableCollection<string>(venue.ImageUrls);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Erro", $"Falha ao carregar local: {ex.Message}", "OK");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
     }
 
     [RelayCommand]
@@ -138,3 +152,4 @@ public partial class VenueEditViewModel : ObservableObject
         }
     }
 }
+

@@ -22,40 +22,40 @@ public class VenueService : IVenueService
         _userService = userService;
     }
 
-public async Task<List<VenueResponseDto>> GetVenuesByOwnerAsync()
-{
-    try
+    public async Task<List<VenueResponseDto>> GetVenuesByOwnerAsync()
     {
-        var ownerId = UserSession.CurrentUser.Id;
-
-        if (ownerId == null)
-            throw new Exception("Usuário não encontrado na sessão.");
-
-        var authToken = await SecureStorage.GetAsync("auth_token");
-
-        if (string.IsNullOrWhiteSpace(authToken))
-            throw new Exception("Token não encontrado.");
-
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
-
-        var endpoint = $"{_apiSettings.BaseUrl}{_apiSettings.VenuesEndpoint}{ownerId}";
-        var response = await _httpClient.GetAsync(endpoint);
-
-        if (!response.IsSuccessStatusCode)
+        try
         {
-            var error = await response.Content.ReadAsStringAsync();
-            throw new Exception($"Erro ao buscar locais do dono: {error}");
-        }
+            var ownerId = UserSession.CurrentUser.Id;
 
-        var result = await response.Content.ReadFromJsonAsync<VenueListResponseDto>();
-        return result?.Data ?? new List<VenueResponseDto>();
+            if (ownerId == null)
+                throw new Exception("Usuário não encontrado na sessão.");
+
+            var authToken = await SecureStorage.GetAsync("auth_token");
+
+            if (string.IsNullOrWhiteSpace(authToken))
+                throw new Exception("Token não encontrado.");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+            var endpoint = $"{_apiSettings.BaseUrl}{_apiSettings.VenuesEndpoint}{ownerId}";
+            var response = await _httpClient.GetAsync(endpoint);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Erro ao buscar locais do dono: {error}");
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<VenueListResponseDto>();
+            return result?.Data ?? new List<VenueResponseDto>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}");
+            return new List<VenueResponseDto>();
+        }
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Erro: {ex.Message}");
-        return new List<VenueResponseDto>();
-    }
-}
     public async Task CreateVenueAsync(CreateVenueRequestDto dto)
     {
         try
@@ -123,4 +123,34 @@ public async Task<List<VenueResponseDto>> GetVenuesByOwnerAsync()
         }
     }
 
+    public async Task<VenueResponseDto> GetVenueByIdAsync(int venueId)
+    {
+        try
+        {
+            var authToken = await SecureStorage.GetAsync("auth_token");
+            if (string.IsNullOrWhiteSpace(authToken))
+                throw new Exception("Token não encontrado.");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+            var url = $"{_apiSettings.BaseUrl}{_apiSettings.GetVenueByIdEndpoint}{venueId}";
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Erro ao buscar local: {error}");
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<VenueResponseDto>();
+
+            return result;
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao buscar local por ID: {ex.Message}");
+            throw;
+        }
+    }
 }

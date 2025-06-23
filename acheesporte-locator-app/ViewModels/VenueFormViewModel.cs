@@ -35,7 +35,6 @@ public partial class VenueFormViewModel : ObservableObject
         VenueTypes = new ObservableCollection<VenueTypeResponseDto>();
     }
 
-    // Campos do formulário
     [ObservableProperty] private string name;
     [ObservableProperty] private string street;
     [ObservableProperty] private string number;

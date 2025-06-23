@@ -36,4 +36,6 @@ public class ApiSettings
     public string CreateVenuesEndpoint { get; set; }
 
     public string UpdateVenueEndpoint { get; set; }
+
+    public string GetVenueByIdEndpoint { get; set; }
 }
