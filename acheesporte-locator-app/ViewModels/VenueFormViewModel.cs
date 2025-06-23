@@ -1,5 +1,6 @@
 ﻿using acheesporte_locator_app.Dtos.VenueDtos;
 using acheesporte_locator_app.Dtos.VenueTypeDtos;
+using acheesporte_locator_app.Helpers;
 using acheesporte_locator_app.Interfaces;
 using acheesporte_locator_app.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -155,6 +156,14 @@ public partial class VenueFormViewModel : ObservableObject
         try
         {
             IsLoading = true;
+
+            if (UserSession.CurrentUser is null)
+            {
+                await Shell.Current.DisplayAlert("Erro", "Usuário não autenticado. Faça login novamente.", "OK");
+                return;
+            }
+
+            OwnerId = UserSession.CurrentUser.Id;
 
             var dto = new CreateVenueRequestDto
             {

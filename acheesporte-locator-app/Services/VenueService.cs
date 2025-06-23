@@ -2,8 +2,10 @@
 using acheesporte_locator_app.Dtos.VenueDtos;
 using acheesporte_locator_app.Helpers;
 using acheesporte_locator_app.Interfaces;
+using CommunityToolkit.Maui.Core.Views;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace acheesporte_locator_app.Services;
 
@@ -24,7 +26,7 @@ public async Task<List<VenueResponseDto>> GetVenuesByOwnerAsync()
 {
     try
     {
-        var ownerId = UserSession.CurrentUser?.Id;
+        var ownerId = UserSession.CurrentUser.Id;
 
         if (ownerId == null)
             throw new Exception("Usuário não encontrado na sessão.");
@@ -65,9 +67,20 @@ public async Task<List<VenueResponseDto>> GetVenuesByOwnerAsync()
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
-            var url = $"{_apiSettings.BaseUrl}/{_apiSettings.VenuesEndpoint}"; 
+            var url = $"{_apiSettings.BaseUrl}{_apiSettings.CreateVenuesEndpoint}";
+            await Shell.Current.DisplayAlert("Endpoint URL", $"The URL is: {url}", "OK");
+
+            var json = JsonSerializer.Serialize(dto);
+            await Shell.Current.DisplayAlert("JSON Enviado", json, "OK");
 
             var response = await _httpClient.PostAsJsonAsync(url, dto);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            await Shell.Current.DisplayAlert("Response",
+                $"Status: {(int)response.StatusCode}\n\n{responseContent}",
+                "OK");
+
 
             if (!response.IsSuccessStatusCode)
             {

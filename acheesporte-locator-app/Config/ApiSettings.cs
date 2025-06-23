@@ -32,4 +32,6 @@ public class ApiSettings
     public string UploadVenueImagesEndpoint { get; set; }
 
     public string VenueTypeEndpoint { get; set; }
+
+    public string CreateVenuesEndpoint { get; set; }
 }

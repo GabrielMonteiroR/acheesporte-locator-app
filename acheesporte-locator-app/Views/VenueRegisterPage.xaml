@@ -88,12 +88,6 @@
                     TextColor="White"  
                     CornerRadius="8" />
 
-            <Label Text="Latitude" TextColor="#CCCCCC" />
-            <Entry Text="{Binding Latitude}" IsReadOnly="True" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
-
-            <Label Text="Longitude" TextColor="#CCCCCC" />
-            <Entry Text="{Binding Longitude}" IsReadOnly="True" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
-
             <!-- Imagens -->
             <Button Text="Selecionar Imagens"  
                     Command="{Binding SelecionarImagensCommand}"  
@@ -108,7 +102,11 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame WidthRequest="100" HeightRequest="100" Padding="2" Margin="4" HasShadow="False" BackgroundColor="#1E1E1E">
-                            <Image Source="{Binding .}" Aspect="AspectFill" />
+                            <Image Aspect="AspectFill">
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding .}" CachingEnabled="False" />
+                                </Image.Source>
+                            </Image>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
