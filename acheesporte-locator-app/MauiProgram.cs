@@ -71,6 +71,12 @@ public static class MauiProgram
             client.BaseAddress = new Uri(apiSettings.BaseUrl);
         });
 
+        builder.Services.AddHttpClient<GooglePlacesService>(client =>
+        {
+            var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
+            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+        });
+
         builder.Services.AddHttpClient<IUserInterface, UserService>(client =>
         {
             var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();

@@ -1,28 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
-             x:Class="acheesporte_locator_app.Views.MapSelectPage"
-             BackgroundColor="#121212"
-             Shell.NavBarIsVisible="True"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"  
+             x:Class="acheesporte_locator_app.Views.MapSelectPage"  
+             BackgroundColor="#121212"  
              Shell.BackgroundColor="#121212"
-             Shell.TitleColor="DeepPink"
-             Shell.TabBarIsVisible="False"
              Shell.ForegroundColor="DeepPink"
-             Title="Selecione seu local">
+             Shell.TitleColor="DeepPink"
+             Title="Selecione seu local"  
+             Shell.NavBarIsVisible="True"  
+             Shell.TabBarIsVisible="False">
 
     <Grid>
-        <maps:Map x:Name="MapControl"
-                  IsShowingUser="true"
-                  MapType="Hybrid"
+        <!-- Mapa como base (ZIndex 0) -->
+        <maps:Map x:Name="MapControl"  
+                  IsShowingUser="true"  
+                  MapType="Hybrid"  
                   MapClicked="OnMapClicked" />
 
-        <Button Text="Confirmar Localização"
-                VerticalOptions="End"
-                HorizontalOptions="Fill"
-                Margin="20"
-                Clicked="OnConfirmClicked"
-                BackgroundColor="DeepPink"
-                TextColor="White" />
+        <!-- Sobreposição UI (ZIndex 1) -->
+        <Grid RowSpacing="10"  
+              Margin="0"  
+              Padding="0"  
+              VerticalOptions="Fill"  
+              BackgroundColor="Transparent">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <!-- Espaço -->
+                <RowDefinition Height="Auto" />
+                <!-- Botão -->
+            </Grid.RowDefinitions>
+
+            <!-- Botão fixado -->
+            <Button Text="Confirmar Localização"  
+                    Grid.Row="1"  
+                    Clicked="OnConfirmClicked"  
+                    BackgroundColor="DeepPink"  
+                    TextColor="White"  
+                    HeightRequest="50"  
+                    Margin="20,10" />
+        </Grid>
     </Grid>
 </ContentPage>

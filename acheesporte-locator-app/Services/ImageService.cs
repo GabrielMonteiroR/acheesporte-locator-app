@@ -1,6 +1,8 @@
-﻿using acheesporte_locator_app.Config;
+﻿using acheesporte_locator_app;
+using acheesporte_locator_app.Config;
 using acheesporte_locator_app.Dtos.ImageUploadDtos;
 using acheesporte_locator_app.Interfaces;
+using CommunityToolkit.Maui.Core.Views;
 using System.Text.Json;
 
 namespace acheesporte_athlete_app.Services;
@@ -88,8 +90,7 @@ public class ImageService : IImageInterface
                 content.Add(new StreamContent(stream), "images", file.FileName);
             }
 
-            var url = $"{_apiSettings.BaseUrl}/{_apiSettings.VenueImageUploadEndpoint}";
-            var response = await _httpClient.PostAsync(url, content);
+            var url = $"{_apiSettings.BaseUrl}{_apiSettings.UploadVenueImagesEndpoint}";           var response = await _httpClient.PostAsync(url, content);
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Erro ao fazer upload das imagens: {response.ReasonPhrase}");

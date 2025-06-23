@@ -18,4 +18,16 @@ public partial class VenueRegisterPage : ContentPage
 
         await _viewModel.LoadVenueTypesAsync();
     }
+
+    private void OnPostalCodeChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(e.NewTextValue) && e.NewTextValue.Length == 8)
+        {
+            if (_viewModel?.FindAddressByPostalCodeCommand?.CanExecute(null) == true)
+            {
+                _viewModel.FindAddressByPostalCodeCommand.Execute(null);
+            }
+        }
+    }
+
 }
