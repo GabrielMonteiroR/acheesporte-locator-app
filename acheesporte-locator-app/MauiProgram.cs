@@ -40,6 +40,8 @@ public static class MauiProgram
         builder.Services.AddTransient<VenueFormViewModel>();
         builder.Services.AddTransient<VenueRegisterPage>();
         builder.Services.AddTransient<MapSelectPage>();
+        builder.Services.AddTransient<VenueEditPage>();
+        builder.Services.AddTransient<VenueEditViewModel>();
 
         builder.Services.AddHttpClient<VenueService>(client =>
         {

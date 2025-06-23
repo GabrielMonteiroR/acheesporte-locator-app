@@ -1,0 +1,86 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"
+             x:Class="acheesporte_locator_app.Views.VenueEditPage"
+             x:DataType="viewmodels:VenueEditViewModel"
+             Title="Editar Local"
+             BackgroundColor="#121212"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label Text="Nome" TextColor="White"/>
+            <Entry Text="{Binding Name}" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="CEP" TextColor="White"/>
+            <Entry Text="{Binding PostalCode}" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Rua" TextColor="White"/>
+            <Entry Text="{Binding Street}" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Número" TextColor="White"/>
+            <Entry Text="{Binding Number}" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Complemento" TextColor="White"/>
+            <Entry Text="{Binding Complement}" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Bairro" TextColor="White"/>
+            <Entry Text="{Binding Neighborhood}" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Cidade" TextColor="White"/>
+            <Entry Text="{Binding City}" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Estado" TextColor="White"/>
+            <Entry Text="{Binding State}" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Descrição" TextColor="White"/>
+            <Editor Text="{Binding Description}" AutoSize="TextChanges" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Capacidade" TextColor="White"/>
+            <Entry Text="{Binding Capacity}" Keyboard="Numeric" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Regras" TextColor="White"/>
+            <Editor Text="{Binding Rules}" AutoSize="TextChanges" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Latitude" TextColor="White"/>
+            <Entry Text="{Binding Latitude}" IsReadOnly="True" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Label Text="Longitude" TextColor="White"/>
+            <Entry Text="{Binding Longitude}" IsReadOnly="True" BackgroundColor="AliceBlue" TextColor="Black"/>
+
+            <Button Text="Selecionar Novas Imagens"
+                    Command="{Binding SelecionarImagensCommand}"
+                    BackgroundColor="#555"
+                    TextColor="White"
+                    CornerRadius="8"/>
+
+            <CollectionView ItemsSource="{Binding ImageUrls}" HeightRequest="100">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame WidthRequest="100" HeightRequest="100" Padding="2" Margin="4" HasShadow="False" BackgroundColor="#1E1E1E">
+                            <Image>
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding .}" CachingEnabled="False"/>
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Salvar Alterações"
+                    Command="{Binding UpdateVenueCommand}"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    CornerRadius="12"
+                    FontAttributes="Bold"
+                    HeightRequest="50"/>
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="White"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

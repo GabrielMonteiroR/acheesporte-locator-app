@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace acheesporte_locator_app.ViewModels;
 
+[QueryProperty(nameof(Venue), "venue")]
 public partial class VenueEditViewModel : ObservableObject
 {
     private readonly IVenueService _venueService;
@@ -18,6 +19,8 @@ public partial class VenueEditViewModel : ObservableObject
 
         ImageUrls = new ObservableCollection<string>();
     }
+    [ObservableProperty]
+    private VenueResponseDto venue;
 
     [ObservableProperty] private int venueId;
     [ObservableProperty] private string name;
@@ -36,6 +39,14 @@ public partial class VenueEditViewModel : ObservableObject
     [ObservableProperty] private int venueTypeId;
     [ObservableProperty] private ObservableCollection<string> imageUrls;
     [ObservableProperty] private bool isLoading;
+
+    partial void OnVenueChanged(VenueResponseDto value)
+    {
+        if (value != null)
+        {
+            LoadFromVenue(value);
+        }
+    }
 
     public void LoadFromVenue(VenueResponseDto venue)
     {

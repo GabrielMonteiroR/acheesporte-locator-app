@@ -1,6 +1,7 @@
 ﻿using acheesporte_locator_app.Dtos.VenueDtos;
 using acheesporte_locator_app.Helpers;
 using acheesporte_locator_app.Services;
+using acheesporte_locator_app.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -56,5 +57,17 @@ public partial class VenueViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync("VenueRegisterPage");
     }
+
+    [RelayCommand]
+    public async Task NavigateToEditVenueAsync(VenueResponseDto venue)
+    {
+        if (venue == null) return;
+
+        await Shell.Current.GoToAsync(nameof(VenueEditPage), true, new Dictionary<string, object>
+    {
+        { "Venue", venue }
+    });
+    }
+
 
 }
