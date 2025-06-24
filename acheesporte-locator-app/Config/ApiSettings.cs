@@ -40,4 +40,6 @@ public class ApiSettings
     public string GetVenueByIdEndpoint { get; set; }
 
     public string GetAvailableTimesByVenueIdEndpoint { get; set; }
+
+    public string CreateAvailableTimesEndpoint { get; set; }
 }

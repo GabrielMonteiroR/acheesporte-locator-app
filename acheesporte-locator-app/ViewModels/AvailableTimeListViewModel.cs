@@ -66,4 +66,14 @@ public partial class AvailableTimeListViewModel : ObservableObject
         // Por enquanto, apenas visual.
         Console.WriteLine($"Apagar horário ID: {time.Id}");
     }
+
+    [RelayCommand]
+    public async Task NavigateToAddAvailableTimeAsync()
+    {
+        await Shell.Current.GoToAsync("AddAvailableTimePage", true, new Dictionary<string, object>
+    {
+        { "venueId", VenueId }
+    });
+    }
+
 }
