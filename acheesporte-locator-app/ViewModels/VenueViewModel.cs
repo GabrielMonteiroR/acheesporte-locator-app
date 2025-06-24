@@ -69,4 +69,16 @@ public partial class VenueViewModel : ObservableObject
     });
     }
 
+    [RelayCommand]
+    public async Task NavigateToAvailableTimeListAsync(VenueResponseDto venue)
+    {
+        if (venue == null) return;
+
+        await Shell.Current.GoToAsync("AvailableTimeListPage", true, new Dictionary<string, object>
+    {
+        { "venueId", venue.Id }
+    });
+    }
+
+
 }

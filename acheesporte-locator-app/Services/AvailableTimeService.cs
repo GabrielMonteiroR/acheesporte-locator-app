@@ -1,5 +1,5 @@
 ﻿using acheesporte_locator_app.Config;
-using acheesporte_locator_app.Dtos.Availability;
+using acheesporte_locator_app.Dtos.AvailabilityTimes;
 using acheesporte_locator_app.Interfaces;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;

@@ -1,4 +1,4 @@
-﻿using acheesporte_locator_app.Dtos.Availability;
+﻿using acheesporte_locator_app.Dtos.AvailabilityTimes;
 
 namespace acheesporte_locator_app.Interfaces;
 

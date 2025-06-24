@@ -1,4 +1,4 @@
-﻿using acheesporte_locator_app.Dtos.Availability;
+﻿using acheesporte_locator_app.Dtos.AvailabilityTimes;
 using acheesporte_locator_app.Interfaces;
 using acheesporte_locator_app.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -12,7 +12,7 @@ public partial class AvailableTimeListViewModel : ObservableObject
 {
     private readonly IAvailableTimesService _availableTimesService;
 
-    public AvailableTimeListViewModel(AvailableTimesService availableTimesService)
+    public AvailableTimeListViewModel(IAvailableTimesService availableTimesService)
     {
         _availableTimesService = availableTimesService;
         AvailabilityTimes = new ObservableCollection<VenueAvailabilityTimeDto>();

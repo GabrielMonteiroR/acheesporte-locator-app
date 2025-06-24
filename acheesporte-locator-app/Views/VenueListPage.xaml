@@ -66,11 +66,14 @@
         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:VenueViewModel}}, Path=NavigateToEditVenueCommand}"
         CommandParameter="{Binding .}" />
 
-                                    <Button Text="Horários"  
-                                            BackgroundColor="PaleVioletRed"  
-                                            TextColor="White"  
-                                            CornerRadius="8"  
-                                            WidthRequest="100" />
+                                    <Button Text="Horários"
+        BackgroundColor="PaleVioletRed"
+        TextColor="White"
+        CornerRadius="8"
+        WidthRequest="100"
+        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:VenueViewModel}}, Path=NavigateToAvailableTimeListCommand}"
+        CommandParameter="{Binding .}" />
+
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </Border>
