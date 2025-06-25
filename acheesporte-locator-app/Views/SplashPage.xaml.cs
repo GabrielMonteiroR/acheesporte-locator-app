@@ -5,9 +5,9 @@ namespace acheesporte_locator_app.Views;
 
 public partial class SplashPage : ContentPage
 {
-    private readonly IUserInterface _userInterface;
+    private readonly IUserService _userInterface;
 
-    public SplashPage(IUserInterface userService)
+    public SplashPage(IUserService userService)
     {
         InitializeComponent();
         _userInterface = userService;

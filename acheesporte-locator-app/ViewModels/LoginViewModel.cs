@@ -9,9 +9,9 @@ namespace acheesporte_locator_app.ViewModels;
 
 public partial class LoginViewModel : ObservableObject
 {
-    private readonly IUserInterface _userInterface;
+    private readonly IUserService _userInterface;
 
-    public LoginViewModel(IUserInterface userService)
+    public LoginViewModel(IUserService userService)
     {
         _userInterface = userService;
     }

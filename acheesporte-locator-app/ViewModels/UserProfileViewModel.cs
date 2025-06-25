@@ -2,14 +2,9 @@
 using acheesporte_locator_app.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Threading.Tasks;
-using Windows.Networking;
-using Windows.System;
-using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace acheesporte_locator_app.ViewModels;
 
-[QueryProperty(nameof(UserId), "userId")]
 public partial class UserProfileViewModel : ObservableObject
 {
     private readonly IUserService _userService;
@@ -47,6 +42,9 @@ public partial class UserProfileViewModel : ObservableObject
         {
             IsLoading = true;
 
+            var currentUser = await _userService.GetCurrentUserAsync();
+            UserId = currentUser.Id;
+
             var user = await _userService.GetUserByIdAsync(UserId);
 
             FirstName = user.FirstName;
@@ -54,6 +52,8 @@ public partial class UserProfileViewModel : ObservableObject
             Email = user.Email;
             Phone = user.Phone;
             ProfileImageUrl = user.ProfileImageUrl;
+
+            await Shell.Current.DisplayAlert("Usuário", $"Bem-vindo, {user.FirstName}", "OK");
         }
         catch (Exception ex)
         {
@@ -64,6 +64,7 @@ public partial class UserProfileViewModel : ObservableObject
             IsLoading = false;
         }
     }
+
 
     [RelayCommand]
     public async Task SaveAsync()

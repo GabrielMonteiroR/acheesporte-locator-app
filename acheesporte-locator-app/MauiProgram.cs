@@ -48,6 +48,8 @@ public static class MauiProgram
         builder.Services.AddTransient<AddAvailableTimeViewModel>();
         builder.Services.AddTransient<EditAvailableTimePage>();
         builder.Services.AddTransient<EditAvailableTimeViewModel>();
+        builder.Services.AddTransient<UserProfilePage>();
+        builder.Services.AddTransient<UserProfileViewModel>();
 
         builder.Services.AddHttpClient<VenueService>(client =>
         {
@@ -91,7 +93,7 @@ public static class MauiProgram
             client.BaseAddress = new Uri(apiSettings.BaseUrl);
         });
 
-        builder.Services.AddHttpClient<IUserInterface, UserService>(client =>
+        builder.Services.AddHttpClient<IUserService, UserService>(client =>
         {
             var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
             client.BaseAddress = new Uri(apiSettings.BaseUrl);

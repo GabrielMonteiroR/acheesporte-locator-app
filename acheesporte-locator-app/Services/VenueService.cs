@@ -13,9 +13,9 @@ public class VenueService : IVenueService
 {
     private readonly HttpClient _httpClient;
     private readonly ApiSettings _apiSettings;
-    private readonly IUserInterface _userService;
+    private readonly IUserService _userService;
 
-    public VenueService(HttpClient httpClient, ApiSettings apiSettings, IUserInterface userService)
+    public VenueService(HttpClient httpClient, ApiSettings apiSettings, IUserService userService)
     {
         _httpClient = httpClient;
         _apiSettings = apiSettings;

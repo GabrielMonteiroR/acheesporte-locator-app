@@ -7,7 +7,7 @@ using System.Net.Http.Json;
 
 namespace acheesporte_locator_app.Services;
 
-public class UserService : IUserInterface
+public class UserService : IUserService
 {
     private readonly HttpClient _httpClient;
     private readonly ApiSettings _apiSettings;
@@ -105,20 +105,43 @@ public class UserService : IUserInterface
 
     public async Task<UserResponseDto> GetUserByIdAsync(int id)
     {
+        var token = await SecureStorage.GetAsync("auth_token");
+        if (string.IsNullOrWhiteSpace(token))
+            throw new UnauthorizedAccessException("Token não encontrado. Faça login novamente.");
+
         var url = $"{_apiSettings.BaseUrl}{_apiSettings.GetUserById}{id}";
-        var response = await _httpClient.GetAsync(url);
+
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        var response = await _httpClient.SendAsync(request);
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<UserResponseDto>();
+        return await response.Content.ReadFromJsonAsync<UserResponseDto>()
+               ?? throw new Exception("Resposta inesperada do servidor.");
     }
+
 
     public async Task<UserResponseDto> UpdateUserAsync(int id, UpdateUserRequestDto dto)
     {
+        var token = await SecureStorage.GetAsync("auth_token");
+        if (string.IsNullOrWhiteSpace(token))
+            throw new UnauthorizedAccessException("Token não encontrado. Faça login novamente.");
+
         var url = $"{_apiSettings.BaseUrl}{_apiSettings.UpdateUserInfoEndpoint}{id}";
-        var response = await _httpClient.PutAsJsonAsync(url, dto);
+
+        var request = new HttpRequestMessage(HttpMethod.Put, url)
+        {
+            Content = JsonContent.Create(dto)
+        };
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        var response = await _httpClient.SendAsync(request);
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<UserResponseDto>();
+        return await response.Content.ReadFromJsonAsync<UserResponseDto>()
+               ?? throw new Exception("Resposta inesperada do servidor.");
     }
+
 }
 

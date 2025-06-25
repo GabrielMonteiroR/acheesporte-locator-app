@@ -47,7 +47,7 @@
      Title="Perfil"
      Route="TestPage"
      Icon="user.png"
-     ContentTemplate="{DataTemplate main:HomePage}"/>
+     ContentTemplate="{DataTemplate main:UserProfilePage}"/>
 
     </TabBar> 
 
