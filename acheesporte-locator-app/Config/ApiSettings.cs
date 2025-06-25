@@ -46,4 +46,6 @@ public class ApiSettings
     public string GetAvailableTimesByIdEndpoint { get; set; }
 
     public string DeleteAvailableTimesEndpoint { get; set; }
+
+    public string UpdateAvailableTimesEndpoint { get; set; }
 }
