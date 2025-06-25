@@ -53,11 +53,16 @@ public partial class AvailableTimeListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public void EditAvailabilityTime(VenueAvailabilityTimeDto time)
+    public async Task EditAvailabilityTimeAsync(VenueAvailabilityTimeDto time)
     {
-        // Por enquanto, apenas visual.
-        Console.WriteLine($"Editar horário ID: {time.Id}");
+        await Shell.Current.GoToAsync("EditAvailableTimePage", new Dictionary<string, object>
+        {
+            ["timeId"] = time.Id,
+            ["venueId"] = VenueId
+        });
     }
+
+
 
     [RelayCommand]
     public async Task DeleteAvailabilityTimeAsync(VenueAvailabilityTimeDto time)

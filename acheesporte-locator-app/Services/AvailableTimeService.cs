@@ -120,5 +120,22 @@ public class AvailableTimesService : IAvailableTimesService
         return await resp.Content.ReadFromJsonAsync<VenueAvailabilityTimeDto>()
                ?? throw new Exception("Resposta inválida do servidor.");
     }
+
+    public async Task<VenueAvailabilityTimeDto> GetAvailabilityTimeByIdAsync(int id)
+    {
+        var token = await SecureStorage.GetAsync("auth_token");
+        if (string.IsNullOrWhiteSpace(token))
+            throw new Exception("Token não encontrado.");
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        var url = $"{_apiSettings.BaseUrl}{_apiSettings.GetAvailableTimesByIdEndpoint}{id}";
+        var response = await _httpClient.GetAsync(url);
+        if (!response.IsSuccessStatusCode)
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Erro ao buscar horário: {error}");
+        }
+        return await response.Content.ReadFromJsonAsync<VenueAvailabilityTimeDto>()
+               ?? throw new Exception("Resposta inválida do servidor.");
+    }
 }
 

@@ -46,7 +46,8 @@ public static class MauiProgram
         builder.Services.AddTransient<AvailableTimeListViewModel>();
         builder.Services.AddTransient<AddAvailableTimePage>();
         builder.Services.AddTransient<AddAvailableTimeViewModel>();
-
+        builder.Services.AddTransient<EditAvailableTimePage>();
+        builder.Services.AddTransient<EditAvailableTimeViewModel>();
 
         builder.Services.AddHttpClient<VenueService>(client =>
         {

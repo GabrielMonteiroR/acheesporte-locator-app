@@ -8,5 +8,6 @@ public interface IAvailableTimesService
     Task<VenueAvailabilityTimeDto> CreateAvailabilityTimeAsync(CreateVenueAvailabilityTimeDto dto);
     Task<bool> DeleteAvailabilityTimeAsync(int id);
     Task<VenueAvailabilityTimeDto> UpdateAvailabilityTimeAsync(int id, UpdateVenueAvailabilityTimeDto dto);
+    Task<VenueAvailabilityTimeDto> GetAvailabilityTimeByIdAsync(int id);
 
 }
