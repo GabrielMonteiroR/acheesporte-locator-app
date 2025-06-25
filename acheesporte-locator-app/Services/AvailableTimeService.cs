@@ -52,7 +52,7 @@ public class AvailableTimesService : IAvailableTimesService
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var json = JsonSerializer.Serialize(dto);
-       await Shell.Current.DisplayAlert("JSON ENVIADO", json, "OK");
+        await Shell.Current.DisplayAlert("JSON ENVIADO", json, "OK");
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         var url = $"{_apiSettings.BaseUrl}{_apiSettings.CreateAvailableTimesEndpoint}";
@@ -94,5 +94,31 @@ public class AvailableTimesService : IAvailableTimesService
         return true;
     }
 
+    public async Task<VenueAvailabilityTimeDto> UpdateAvailabilityTimeAsync(int id,
+                                          UpdateVenueAvailabilityTimeDto dto)
+    {
+        var token = await SecureStorage.GetAsync("auth_token");
+        if (string.IsNullOrWhiteSpace(token))
+            throw new Exception("Token não encontrado.");
+
+        _httpClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", token);
+
+        var json = JsonSerializer.Serialize(dto);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var url = $"{_apiSettings.BaseUrl}{_apiSettings.UpdateAvailableTimesEndpoint}{id}";
+
+        var resp = await _httpClient.PutAsync(url, content);
+
+        if (!resp.IsSuccessStatusCode)
+        {
+            var err = await resp.Content.ReadAsStringAsync();
+            throw new Exception($"Erro ao atualizar horário: {err}");
+        }
+
+        return await resp.Content.ReadFromJsonAsync<VenueAvailabilityTimeDto>()
+               ?? throw new Exception("Resposta inválida do servidor.");
+    }
 }
 
