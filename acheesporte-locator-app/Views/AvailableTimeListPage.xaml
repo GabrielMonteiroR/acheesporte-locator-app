@@ -1,0 +1,96 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"  
+             xmlns:availabilityDtos="clr-namespace:acheesporte_locator_app.Dtos.AvailabilityTimes"  
+             x:Class="acheesporte_locator_app.Views.AvailableTimeListPage"  
+             x:DataType="viewmodels:AvailableTimeListViewModel"  
+             BackgroundColor="#121212"  
+             Shell.NavBarIsVisible="False"  
+             Shell.PresentationMode="Animated">  
+
+    <Grid>  
+        <Grid.RowDefinitions>  
+            <RowDefinition Height="Auto"/>  
+            <RowDefinition Height="*"/>  
+        </Grid.RowDefinitions>  
+
+        <!-- Header -->  
+        <Grid Padding="24,4,4,4" HeightRequest="100">  
+            <Label Text="Horários Disponíveis"  
+                   FontSize="22"  
+                   FontAttributes="Bold"  
+                   TextColor="DeepPink"  
+                   VerticalOptions="Center"  
+                   HorizontalOptions="Start"/>  
+        </Grid>  
+
+        <!-- Listagem -->  
+        <Grid Grid.Row="1">  
+            <CollectionView ItemsSource="{Binding AvailabilityTimes}"  
+                            IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBoolConverter}}"  
+                            SelectionMode="None"  
+                            Margin="0,10">  
+                <CollectionView.EmptyView>  
+                    <Label Text="Nenhum horário encontrado."  
+                           HorizontalOptions="Center"  
+                           TextColor="White"  
+                           FontAttributes="Italic"  
+                           FontSize="14"/>  
+                </CollectionView.EmptyView>  
+                <CollectionView.ItemTemplate>  
+                    <DataTemplate x:DataType="availabilityDtos:VenueAvailabilityTimeDto">  
+                        <Border Stroke="#DDD"  
+                                StrokeShape="RoundRectangle 12"  
+                                Padding="12"  
+                                Margin="0,5"  
+                                BackgroundColor="Ivory">  
+                            <VerticalStackLayout>  
+                                <Label Text="{Binding StartDate, StringFormat='Início: {0:dd/MM/yyyy HH:mm}'}"  
+                                       FontSize="14"  
+                                       TextColor="DarkSlateGray"/>  
+                                <Label Text="{Binding EndDate, StringFormat='Fim: {0:dd/MM/yyyy HH:mm}'}"  
+                                       FontSize="14"  
+                                       TextColor="DarkSlateGray"/>  
+                                <Label Text="{Binding Price, StringFormat='Preço: R$ {0:F2}'}"  
+                                       FontSize="14"  
+                                       TextColor="DarkSlateGray"/>  
+
+                                <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
+                                    <Button Text="Editar"
+        BackgroundColor="DimGray"
+        TextColor="White"
+        CornerRadius="8"
+        WidthRequest="100"
+        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AvailableTimeListViewModel}},
+                          Path=EditAvailabilityTimeCommand}"
+        CommandParameter="{Binding .}" />
+
+
+                                    <Button Text="Apagar"  
+                                            BackgroundColor="DarkRed"  
+                                            TextColor="White"  
+                                            CornerRadius="8"  
+                                            WidthRequest="100"  
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AvailableTimeListViewModel}}, Path=DeleteAvailabilityTimeCommand}"  
+                                            CommandParameter="{Binding .}"/>  
+                                </HorizontalStackLayout>  
+                            </VerticalStackLayout>  
+                        </Border>  
+                    </DataTemplate>  
+                </CollectionView.ItemTemplate>  
+            </CollectionView>
+            <Button Text="+"  
+            FontSize="24"  
+            BackgroundColor="DeepPink"  
+            TextColor="White"  
+            CornerRadius="30"  
+            WidthRequest="60"  
+            HeightRequest="60"  
+            HorizontalOptions="End"  
+            VerticalOptions="End"  
+            Margin="20"  
+            ZIndex="1"
+            Command="{Binding NavigateToAddAvailableTimeCommand}" />
+        </Grid>  
+    </Grid>  
+</ContentPage>

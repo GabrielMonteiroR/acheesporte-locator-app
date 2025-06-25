@@ -42,8 +42,20 @@ public static class MauiProgram
         builder.Services.AddTransient<MapSelectPage>();
         builder.Services.AddTransient<VenueEditPage>();
         builder.Services.AddTransient<VenueEditViewModel>();
+        builder.Services.AddTransient<AvailableTimeListPage>();
+        builder.Services.AddTransient<AvailableTimeListViewModel>();
+        builder.Services.AddTransient<AddAvailableTimePage>();
+        builder.Services.AddTransient<AddAvailableTimeViewModel>();
+        builder.Services.AddTransient<EditAvailableTimePage>();
+        builder.Services.AddTransient<EditAvailableTimeViewModel>();
 
         builder.Services.AddHttpClient<VenueService>(client =>
+        {
+            var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
+            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+        });
+
+        builder.Services.AddHttpClient<IAvailableTimesService, AvailableTimesService>(client =>
         {
             var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
             client.BaseAddress = new Uri(apiSettings.BaseUrl);

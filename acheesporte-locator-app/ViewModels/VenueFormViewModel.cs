@@ -92,7 +92,7 @@ public partial class VenueFormViewModel : ObservableObject
 
 
     [RelayCommand]
-    public async Task SelecionarImagensAsync()
+    public async Task SelectImagesAsync()
     {
         try
         {

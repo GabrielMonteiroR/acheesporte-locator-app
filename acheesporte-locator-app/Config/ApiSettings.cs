@@ -38,4 +38,14 @@ public class ApiSettings
     public string UpdateVenueEndpoint { get; set; }
 
     public string GetVenueByIdEndpoint { get; set; }
+
+    public string GetAvailableTimesByVenueIdEndpoint { get; set; }
+
+    public string CreateAvailableTimesEndpoint { get; set; }
+
+    public string GetAvailableTimesByIdEndpoint { get; set; }
+
+    public string DeleteAvailableTimesEndpoint { get; set; }
+
+    public string UpdateAvailableTimesEndpoint { get; set; }
 }
