@@ -74,5 +74,25 @@ public class AvailableTimesService : IAvailableTimesService
         return result!;
     }
 
+    public async Task<bool> DeleteAvailabilityTimeAsync(int id)
+    {
+        var token = await SecureStorage.GetAsync("auth_token");
+        if (string.IsNullOrWhiteSpace(token))
+            throw new Exception("Token não encontrado.");
+
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        var url = $"{_apiSettings.BaseUrl}{_apiSettings.DeleteAvailableTimesEndpoint}{id}";
+        var response = await _httpClient.DeleteAsync(url);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Erro ao excluir horário: {error}");
+        }
+
+        return true;
+    }
+
 }
 

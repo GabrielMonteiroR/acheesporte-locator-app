@@ -6,4 +6,6 @@ public interface IAvailableTimesService
 {
     Task<List<VenueAvailabilityTimeDto>> GetAvailableTimesByVenueIdAsync(int venueId, bool? isReserved = null);
     Task<VenueAvailabilityTimeDto> CreateAvailabilityTimeAsync(CreateVenueAvailabilityTimeDto dto);
+    Task<bool> DeleteAvailabilityTimeAsync(int id);
+
 }

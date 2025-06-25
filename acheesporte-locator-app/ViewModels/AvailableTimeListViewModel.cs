@@ -1,6 +1,5 @@
 ﻿using acheesporte_locator_app.Dtos.AvailabilityTimes;
 using acheesporte_locator_app.Interfaces;
-using acheesporte_locator_app.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -61,11 +60,27 @@ public partial class AvailableTimeListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public void DeleteAvailabilityTime(VenueAvailabilityTimeDto time)
+    public async Task DeleteAvailabilityTimeAsync(VenueAvailabilityTimeDto time)
     {
-        // Por enquanto, apenas visual.
-        Console.WriteLine($"Apagar horário ID: {time.Id}");
+        var confirm = await Shell.Current.DisplayAlert("Confirmação", $"Deseja excluir o horário das {time.StartDate:t} às {time.EndDate:t}?", "Sim", "Não");
+        if (!confirm) return;
+
+        try
+        {
+            var result = await _availableTimesService.DeleteAvailabilityTimeAsync(time.Id);
+            if (result)
+            {
+                AvailabilityTimes.Remove(time);
+                await Shell.Current.DisplayAlert("Sucesso", "Horário excluído com sucesso!", "OK");
+                OnPropertyChanged(nameof(IsEmpty));
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Erro", $"Erro ao excluir horário: {ex.Message}", "OK");
+        }
     }
+
 
     [RelayCommand]
     public async Task NavigateToAddAvailableTimeAsync()
