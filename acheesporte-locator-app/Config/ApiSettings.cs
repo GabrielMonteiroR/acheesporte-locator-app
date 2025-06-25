@@ -48,4 +48,8 @@ public class ApiSettings
     public string DeleteAvailableTimesEndpoint { get; set; }
 
     public string UpdateAvailableTimesEndpoint { get; set; }
-}
+
+    public string GetUserById { get; set; }
+
+    public string UpdateUserInfoEndpoint { get; set; }
+    }
