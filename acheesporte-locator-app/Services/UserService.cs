@@ -1,5 +1,6 @@
 ﻿using acheesporte_locator_app.Config;
 using acheesporte_locator_app.Dtos;
+using acheesporte_locator_app.Dtos.Users;
 using acheesporte_locator_app.Interfaces;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -100,6 +101,24 @@ public class UserService : IUserInterface
         {
             throw new Exception("An error occurred while retrieving the current user.", ex);
         }
+    }
+
+    public async Task<UserResponseDto> GetUserByIdAsync(int id)
+    {
+        var url = $"{_apiSettings.BaseUrl}{_apiSettings.GetUserById}{id}";
+        var response = await _httpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadFromJsonAsync<UserResponseDto>();
+    }
+
+    public async Task<UserResponseDto> UpdateUserAsync(int id, UpdateUserRequestDto dto)
+    {
+        var url = $"{_apiSettings.BaseUrl}{_apiSettings.UpdateUserInfoEndpoint}{id}";
+        var response = await _httpClient.PutAsJsonAsync(url, dto);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadFromJsonAsync<UserResponseDto>();
     }
 }
 
