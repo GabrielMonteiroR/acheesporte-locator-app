@@ -10,10 +10,10 @@ namespace acheesporte_locator_app.ViewModels;
 
 public partial class RegisterViewModel : ObservableObject
 {
-    private readonly IImageInterface _imageInterface;
+    private readonly IImageService _imageInterface;
     private readonly IUserService _userInterface;
 
-    public RegisterViewModel(IImageInterface imageService, IUserService userService)
+    public RegisterViewModel(IImageService imageService, IUserService userService)
     {
         _imageInterface = imageService;
         _userInterface = userService;

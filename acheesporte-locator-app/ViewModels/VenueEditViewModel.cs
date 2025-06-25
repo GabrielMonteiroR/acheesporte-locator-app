@@ -10,9 +10,9 @@ namespace acheesporte_locator_app.ViewModels;
 public partial class VenueEditViewModel : ObservableObject
 {
     private readonly IVenueService _venueService;
-    private readonly IImageInterface _imageService;
+    private readonly IImageService _imageService;
 
-    public VenueEditViewModel(IVenueService venueService, IImageInterface imageService)
+    public VenueEditViewModel(IVenueService venueService, IImageService imageService)
     {
         _venueService = venueService;
         _imageService = imageService;

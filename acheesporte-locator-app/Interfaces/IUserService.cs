@@ -10,4 +10,5 @@ public interface IUserService
     Task<CurrentUserDto> GetCurrentUserAsync();
     Task<UserResponseDto> GetUserByIdAsync(int id);
     Task<UserResponseDto> UpdateUserAsync(int id, UpdateUserRequestDto dto);
+    Task<UserResponseDto> UpdateUserProfileImageAsync(int userId, string imageUrl);
 }

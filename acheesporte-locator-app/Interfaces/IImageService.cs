@@ -2,7 +2,7 @@
 
 namespace acheesporte_locator_app.Interfaces;
 
-public interface IImageInterface
+public interface IImageService
 {
   Task<ImageUploadResponseDto> UploadProfileImageAsync(FileResult file);
   Task<List<ImageUploadResponseDto>> UploadVenuesImageAsync(List<FileResult> files);

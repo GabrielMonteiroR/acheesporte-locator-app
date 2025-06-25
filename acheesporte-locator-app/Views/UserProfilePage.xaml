@@ -1,64 +1,74 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"
-             x:Class="acheesporte_locator_app.Views.UserProfilePage"
-             x:DataType="viewmodels:UserProfileViewModel"
-             BackgroundColor="#121212"
-             Shell.NavBarIsVisible="False">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"  
+             x:Class="acheesporte_locator_app.Views.UserProfilePage"  
+             x:DataType="viewmodels:UserProfileViewModel"  
+             BackgroundColor="#121212"  
+             Shell.NavBarIsVisible="False">  
 
-    <ScrollView>
-        <VerticalStackLayout Padding="24" Spacing="20">
+    <ScrollView>  
+        <VerticalStackLayout Padding="24" Spacing="20">  
 
-            <Label Text="Editar Perfil"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   TextColor="DeepPink" />
+            <Label Text="Editar Perfil"  
+                   FontSize="28"  
+                   FontAttributes="Bold"  
+                   HorizontalOptions="Center"  
+                   TextColor="DeepPink" />  
 
-            <Frame Padding="0" CornerRadius="60" HasShadow="False"
-                   HeightRequest="120" WidthRequest="120"
-                   HorizontalOptions="Center" BackgroundColor="Transparent">
-                <Image Source="{Binding ProfileImageUrl}"
-                       Aspect="AspectFill"
-                       HeightRequest="120" WidthRequest="120"
-                       Clip="Circle"/>
-            </Frame>
+            <Frame Padding="0" CornerRadius="60" HasShadow="False"  
+                   HeightRequest="120" WidthRequest="120"  
+                   HorizontalOptions="Center" BackgroundColor="Transparent">  
+                <Image Source="{Binding ProfileImageUrl}"  
+                       WidthRequest="140"  
+                       HeightRequest="140"  
+                       Aspect="AspectFill"  
+                       HorizontalOptions="Center"  
+                       VerticalOptions="Center"  
+                       Clip="100,0,140,140" />  
+            </Frame>  
 
-            <Entry Placeholder="Nome"
-                   Text="{Binding FirstName}"
-                   TextColor="White"
-                   BackgroundColor="#1E1E1E"
-                   PlaceholderColor="#AAAAAA" />
+            <Button Text="Trocar foto"  
+                    Margin="0,0,0,20"  
+                    Command="{Binding ChangeProfileImageCommand}"  
+                    BackgroundColor="DeepPink"  
+                    TextColor="White"  
+                    CornerRadius="12" />  
 
-            <Entry Placeholder="Sobrenome"
-                   Text="{Binding LastName}"
-                   TextColor="White"
-                   BackgroundColor="#1E1E1E"
-                   PlaceholderColor="#AAAAAA" />
+            <Entry Placeholder="Nome"  
+                   Text="{Binding FirstName}"  
+                   TextColor="White"  
+                   BackgroundColor="#1E1E1E"  
+                   PlaceholderColor="#AAAAAA" />  
 
-            <Entry Placeholder="E-mail"
-                   Text="{Binding Email}"
-                   Keyboard="Email"
-                   TextColor="White"
-                   BackgroundColor="#1E1E1E"
-                   PlaceholderColor="#AAAAAA" />
+            <Entry Placeholder="Sobrenome"  
+                   Text="{Binding LastName}"  
+                   TextColor="White"  
+                   BackgroundColor="#1E1E1E"  
+                   PlaceholderColor="#AAAAAA" />  
 
-            <Entry Placeholder="Telefone"
-                   Text="{Binding Phone}"
-                   Keyboard="Telephone"
-                   TextColor="White"
-                   BackgroundColor="#1E1E1E"
-                   PlaceholderColor="#AAAAAA" />
+            <Entry Placeholder="E-mail"  
+                   Text="{Binding Email}"  
+                   Keyboard="Email"  
+                   TextColor="White"  
+                   BackgroundColor="#1E1E1E"  
+                   PlaceholderColor="#AAAAAA" />  
 
-            <Button Text="Salvar"
-                    Command="{Binding SaveCommand}"
-                    BackgroundColor="DeepPink"
-                    TextColor="White"
-                    CornerRadius="12"
-                    HeightRequest="50"/>
+            <Entry Placeholder="Telefone"  
+                   Text="{Binding Phone}"  
+                   Keyboard="Telephone"  
+                   TextColor="White"  
+                   BackgroundColor="#1E1E1E"  
+                   PlaceholderColor="#AAAAAA" />  
 
-            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
-        </VerticalStackLayout>
-    </ScrollView>
+            <Button Text="Salvar"  
+                    Command="{Binding SaveCommand}"  
+                    BackgroundColor="DeepPink"  
+                    TextColor="White"  
+                    CornerRadius="12"  
+                    HeightRequest="50"/>  
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />  
+        </VerticalStackLayout>  
+    </ScrollView>  
 </ContentPage>

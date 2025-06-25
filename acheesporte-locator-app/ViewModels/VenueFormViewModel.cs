@@ -13,13 +13,13 @@ namespace acheesporte_locator_app.ViewModels;
 public partial class VenueFormViewModel : ObservableObject
 {
     private readonly IVenueService _venueService;
-    private readonly IImageInterface _imageService;
+    private readonly IImageService _imageService;
     private readonly ICepService _viaCepService;
     private readonly IVenueTypeService _venueTypeService;
 
     public VenueFormViewModel(
         IVenueService venueService,
-        IImageInterface imageService,
+        IImageService imageService,
         ICepService viaCepService,
         IVenueTypeService venueTypeService)
     {

@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace acheesporte_athlete_app.Services;
 
-public class ImageService : IImageInterface
+public class ImageService : IImageService
 {
     private HttpClient _httpClient;
     private readonly ApiSettings _apiSettings;
@@ -38,7 +38,9 @@ public class ImageService : IImageInterface
 
             using var stream = await file.OpenReadAsync();
             using var content = new MultipartFormDataContent();
-            content.Add(new StreamContent(stream), "image", file.FileName);
+            var streamContent = new StreamContent(stream);
+            streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
+            content.Add(streamContent, "image", file.FileName);
 
             var url = $"{_apiSettings.BaseUrl}{_apiSettings.ImageUploadEndpoint}";
             var response = await _httpClient.PostAsync(url, content);
@@ -52,7 +54,7 @@ public class ImageService : IImageInterface
             var obj = JsonSerializer.Deserialize<JsonElement>(json);
             return new ImageUploadResponseDto
             {
-                Image = obj.GetProperty("imageUrl").GetProperty("Image").GetString()
+                Image = obj.GetProperty("imageUrl").GetProperty("image").GetString()
             };
 
         }
@@ -83,7 +85,7 @@ public class ImageService : IImageInterface
 
                 var stream = await file.OpenReadAsync();
                 var streamContent = new StreamContent(stream);
-                streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg"); // ou image/png
+                streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg"); 
                 content.Add(streamContent, "images", file.FileName);
             }
 

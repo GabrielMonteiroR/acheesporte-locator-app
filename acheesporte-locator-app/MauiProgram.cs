@@ -81,7 +81,7 @@ public static class MauiProgram
             client.BaseAddress = new Uri(apiSettings.BaseUrl);
         });
 
-        builder.Services.AddHttpClient<IImageInterface, ImageService>(client =>
+        builder.Services.AddHttpClient<IImageService, ImageService>(client =>
         {
             var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
             client.BaseAddress = new Uri(apiSettings.BaseUrl);

@@ -143,5 +143,34 @@ public class UserService : IUserService
                ?? throw new Exception("Resposta inesperada do servidor.");
     }
 
+    public async Task<UserResponseDto> UpdateUserProfileImageAsync(int userId, string imageUrl)
+    {
+        var token = await SecureStorage.GetAsync("auth_token");
+        if (string.IsNullOrWhiteSpace(token))
+            throw new UnauthorizedAccessException("Token não encontrado.");
+
+        _httpClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", token);
+
+        var url = $"{_apiSettings.BaseUrl}{_apiSettings.UpdateUserProfilePictureBaseUrl}{userId}{_apiSettings.UpdateUserProfilePicturePatchUrl}";
+
+        var dto = new UpdateUserProfileImageRequestDto { ImageUrl = imageUrl };
+        var request = new HttpRequestMessage(HttpMethod.Patch, url)
+        {
+            Content = JsonContent.Create(dto)
+        };
+
+        var response = await _httpClient.SendAsync(request);
+        if (!response.IsSuccessStatusCode)
+        {
+            var backendError = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Erro PATCH foto: {backendError}");
+        }
+
+        return await response.Content.ReadFromJsonAsync<UserResponseDto>()
+               ?? throw new Exception("Resposta inesperada do servidor.");
+    }
+
+
 }
 
