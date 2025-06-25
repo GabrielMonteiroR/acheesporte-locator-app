@@ -52,4 +52,8 @@ public class ApiSettings
     public string GetUserById { get; set; }
 
     public string UpdateUserInfoEndpoint { get; set; }
+
+    public string UpdateUserProfilePictureBaseUrl { get; set; }
+
+    public string UpdateUserProfilePicturePatchUrl { get; set; }
     }
