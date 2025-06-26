@@ -56,4 +56,6 @@ public class ApiSettings
     public string UpdateUserProfilePictureBaseUrl { get; set; }
 
     public string UpdateUserProfilePicturePatchUrl { get; set; }
-    }
+
+    public string GetReservationsByVenueIdEndpoint { get; set; }
+}
