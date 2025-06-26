@@ -29,34 +29,74 @@
                            VerticalOptions="Center"/>  
                 </CollectionView.EmptyView>  
 
-                <CollectionView.ItemTemplate>  
-                    <DataTemplate x:DataType="resDtos:ReservationResponseDto">  
-                        <Border Stroke="#DDD"  
-                                StrokeShape="RoundRectangle 12"  
-                                Margin="15,5"  
-                                Padding="12"  
-                                BackgroundColor="Ivory">  
-                            <VerticalStackLayout Spacing="4">  
-                                <Label Text="{Binding VenueAvailabilityTime.StartDate,  
-                                                      StringFormat='Início: {0:dd/MM/yyyy HH:mm}'}"  
-                                       FontAttributes="Bold"  
-                                       FontSize="14"  
-                                       TextColor="Black"/>  
-                                <Label Text="{Binding VenueAvailabilityTime.EndDate,  
-                                                      StringFormat='Término: {0:dd/MM/yyyy HH:mm}'}"  
-                                       FontSize="13"  
-                                       TextColor="#555"/>  
-                                <Label Text="{Binding UserId, StringFormat='Usuário código: {0}'}"  
-                                       FontSize="12"  
-                                       TextColor="#666"/>  
-                                <Label Text="{Binding IsPaid, Converter={StaticResource BoolToPaidConverter}}"  
-                                       FontSize="13"  
-                                       FontAttributes="Bold"  
-                                       TextColor="{Binding IsPaid,  
-                                                           Converter={StaticResource PaidColorConverter}}"/>  
-                            </VerticalStackLayout>  
-                        </Border>  
-                    </DataTemplate>  
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="resDtos:ReservationResponseDto">
+                        <Border Stroke="#DDD"
+            StrokeShape="RoundRectangle 12"
+            Margin="15,5"
+            Padding="12"
+            BackgroundColor="Ivory">
+
+                            <!-- layout horizontal: avatar + detalhes -->
+                            <HorizontalStackLayout Spacing="12">
+
+                                <!-- Avatar -->
+                                <Frame Padding="0"
+                   HeightRequest="60"
+                   WidthRequest="60"
+                   CornerRadius="30"
+                   IsClippedToBounds="True"
+                   HasShadow="False">
+                                    <Image Source="{Binding User.ProfileImageUrl}"
+                       Aspect="AspectFill" />
+                                </Frame>
+
+                                <!-- Detalhes -->
+                                <VerticalStackLayout Spacing="2">
+
+                                    <!-- Nome, e-mail e telefone -->
+                                    <Label Text="{Binding User.FullName}"
+                       FontSize="15"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+
+                                    <Label Text="{Binding User.Email}"
+                       FontSize="12"
+                       TextColor="#444" />
+
+                                    <Label Text="{Binding User.Phone, StringFormat='Tel: {0}'}"
+                       FontSize="12"
+                       TextColor="#444" />
+
+                                    <!-- Datas / preço -->
+                                    <Label Text="{Binding VenueAvailabilityTime.StartDate,
+                                      StringFormat='Início: {0:dd/MM/yyyy HH:mm}'}"
+                       FontSize="12"
+                       TextColor="#555" />
+
+                                    <Label Text="{Binding VenueAvailabilityTime.EndDate,
+                                      StringFormat='Término: {0:dd/MM/yyyy HH:mm}'}"
+                       FontSize="12"
+                       TextColor="#555" />
+
+                                    <Label Text="{Binding VenueAvailabilityTime.Price,
+                                      StringFormat='Preço: {0:C}'}"
+                       FontSize="12"
+                       TextColor="#555" />
+
+                                    <!-- Pago / não pago -->
+                                    <Label Text="{Binding IsPaid,
+                                      Converter={StaticResource BoolToPaidConverter}}"
+                       FontSize="13"
+                       FontAttributes="Bold"
+                       TextColor="{Binding IsPaid,
+                                           Converter={StaticResource PaidColorConverter}}" />
+
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Border>
+                    </DataTemplate>
+
                 </CollectionView.ItemTemplate>  
             </CollectionView>  
         </RefreshView>  

@@ -17,7 +17,10 @@ public class ReservationResponseDto
     public int VenueAvailabilityTimeId { get; set; }
 
     [JsonPropertyName("venueAvailabilityTime")]
-    public VenueAvailabilityTimeDto VenueAvailabilityTime { get; set; }
+    public VenueAvailabilityTimeDto VenueAvailabilityTime { get; set; } = null!;
+
+    [JsonPropertyName("user")]
+    public ReservationUserDto User { get; set; } = null!;
 
     [JsonPropertyName("paymentMethodId")]
     public int PaymentMethodId { get; set; }
