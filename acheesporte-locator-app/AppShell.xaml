@@ -27,9 +27,9 @@
 
         <ShellContent
             Title="Reservas"
-            Route="TestPage"
+            Route="VenueReservationListPage"
             Icon="football.png"
-            ContentTemplate="{DataTemplate main:HomePage}"/>
+            ContentTemplate="{DataTemplate main:VenueReservationListPage}"/>
         
         <ShellContent
      Title="Meus locais"
