@@ -8,26 +8,26 @@
              BackgroundColor="#121212"  
              Shell.NavBarIsVisible="True"
              Shell.BackgroundColor="#121212"
-             Shell.ForegroundColor="DeepPink">  
+             Shell.ForegroundColor="DeepPink">
 
-    <Grid Padding="0,48,0,0">  
+    <Grid Padding="0,48,0,0">
         <Label Text="Reservas do Local"  
                FontSize="22"  
                FontAttributes="Bold"  
                TextColor="DeepPink"  
-               Padding="24,20,0,10"/>  
+               Padding="24,20,0,10"/>
 
         <RefreshView Grid.Row="1"  
                      Command="{Binding RefreshCommand}"  
-                     IsRefreshing="{Binding IsLoading}">  
+                     IsRefreshing="{Binding IsLoading}">
             <CollectionView ItemsSource="{Binding Reservations}"  
-                            Margin="0,0,0,10">  
-                <CollectionView.EmptyView>  
+                            Margin="0,0,0,10">
+                <CollectionView.EmptyView>
                     <Label Text="Nenhuma reserva encontrada."  
                            TextColor="White"  
                            HorizontalOptions="Center"  
-                           VerticalOptions="Center"/>  
-                </CollectionView.EmptyView>  
+                           VerticalOptions="Center"/>
+                </CollectionView.EmptyView>
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="resDtos:ReservationResponseDto">
@@ -55,12 +55,12 @@
                                 <VerticalStackLayout Spacing="2">
 
                                     <!-- Nome, e-mail e telefone -->
-                                    <Label Text="{Binding User.FullName}"
-                       FontSize="15"
-                       FontAttributes="Bold"
-                       TextColor="Black" />
+                                    <Label Text="{Binding User.FullName, StringFormat='Reservado por {0}'}"
+       FontSize="15"
+       FontAttributes="Bold"
+       TextColor="Black" />
 
-                                    <Label Text="{Binding User.Email}"
+                                    <Label Text="{Binding User.Email, StringFormat='Email: {0}'}"
                        FontSize="12"
                        TextColor="#444" />
 
@@ -80,9 +80,9 @@
                        TextColor="#555" />
 
                                     <Label Text="{Binding VenueAvailabilityTime.Price,
-                                      StringFormat='Preço: {0:C}'}"
-                       FontSize="12"
-                       TextColor="#555" />
+                                          StringFormat='Preço: R$ {0:N2}'}"
+                                        FontSize="12"
+                                        TextColor="#555" />
 
                                     <!-- Pago / não pago -->
                                     <Label Text="{Binding IsPaid,
@@ -97,14 +97,14 @@
                         </Border>
                     </DataTemplate>
 
-                </CollectionView.ItemTemplate>  
-            </CollectionView>  
-        </RefreshView>  
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
 
         <ActivityIndicator IsRunning="{Binding IsLoading}"  
                            IsVisible="{Binding IsLoading}"  
                            Color="DeepPink"  
                            HorizontalOptions="Center"  
-                           VerticalOptions="Center"/>  
-    </Grid>  
+                           VerticalOptions="Center"/>
+    </Grid>
 </ContentPage>
