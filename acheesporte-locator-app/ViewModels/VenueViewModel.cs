@@ -80,5 +80,13 @@ public partial class VenueViewModel : ObservableObject
     });
     }
 
-
+    [RelayCommand]
+    private async Task GoToReservationsAsync(int venueId)
+    {
+        if (venueId <= 0) return;
+        await Shell.Current.GoToAsync(
+     nameof(ReservationListPage),
+     true,
+     new ShellNavigationQueryParameters { ["venueId"] = venueId });
+    }
 }
