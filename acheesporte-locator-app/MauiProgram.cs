@@ -57,6 +57,12 @@ public static class MauiProgram
             client.BaseAddress = new Uri(apiSettings.BaseUrl);
         });
 
+        builder.Services.AddHttpClient<IReservationService, ReservationService>(client =>
+        {
+            var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
+            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+        });
+
         builder.Services.AddHttpClient<IAvailableTimesService, AvailableTimesService>(client =>
         {
             var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>();
