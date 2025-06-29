@@ -30,10 +30,10 @@ public class SignUpRequestDto
     [Required]
     public string Phone { get; set; } = string.Empty;
 
-    [JsonPropertyName("cpf")]
+    [JsonPropertyName("cnpj")]
     [JsonRequired]
     [Required]
-    public string Cpf { get; set; } = string.Empty;
+    public string Cnpj { get; set; } = string.Empty;
 
     [JsonPropertyName("image")]
     public string? ProfileImageUrl { get; set; }

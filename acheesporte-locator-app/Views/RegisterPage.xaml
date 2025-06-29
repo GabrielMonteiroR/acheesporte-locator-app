@@ -117,13 +117,13 @@
                            Text="{Binding Phone}" 
                            BackgroundColor="White" TextColor="#200937" />
 
-                    <Label Text="CPF"
+                    <Label Text="CNPJ"
                            FontSize="12"
                            FontAttributes="Bold"
-                           TextColor="{Binding Cpf, Converter={StaticResource EmptyFieldToColorConverter}}" />
+                           TextColor="{Binding Cnpj, Converter={StaticResource EmptyFieldToColorConverter}}" />
                     <Entry Placeholder="000.000.000-00"
                            Keyboard="Numeric"
-                           Text="{Binding Cpf}" 
+                           Text="{Binding Cnpj}" 
                            BackgroundColor="White" TextColor="#200937" />
 
                     <Button Text="Cadastrar"

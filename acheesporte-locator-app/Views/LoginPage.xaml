@@ -63,7 +63,7 @@
                 <Label Text="Email" FontSize="14" TextColor="#E94560" FontAttributes="Bold" />  
                 <Entry Placeholder="Insira seu Email"  
                        Keyboard="Email"  
-                       TextColor="#E94560"  
+                       TextColor="Black"  
                        PlaceholderColor="#888"  
                        BackgroundColor="White"  
                        Margin="0,0,0,0"  
@@ -72,7 +72,7 @@
                 <Label Text="Senha" FontSize="14" TextColor="#E94560" FontAttributes="Bold" />  
                 <Entry Placeholder="Insira sua senha"  
                        IsPassword="True"  
-                       TextColor="#E94560"  
+                       TextColor="Black"  
                        PlaceholderColor="#888"  
                        BackgroundColor="White"  
                        Margin="0,0,0,0"  
@@ -102,6 +102,15 @@
                 </HorizontalStackLayout>  
 
             </VerticalStackLayout>  
-        </Border>  
+        </Border>
+        <ActivityIndicator 
+    IsRunning="{Binding IsBusy}" 
+    IsVisible="{Binding IsBusy}" 
+    VerticalOptions="Center" 
+    HorizontalOptions="Center" 
+    Color="#E94560" 
+    WidthRequest="48" 
+    HeightRequest="48"/>
+
     </Grid>  
 </ContentPage>

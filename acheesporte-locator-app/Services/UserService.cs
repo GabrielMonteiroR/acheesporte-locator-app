@@ -54,23 +54,30 @@ public class UserService : IUserService
             {
                 var registerResponse = await response.Content.ReadFromJsonAsync<SignUpResponseDto>();
                 if (registerResponse is null || string.IsNullOrEmpty(registerResponse.Token))
-                    throw new Exception("Invalid registration response.");
+                    throw new Exception("Resposta de registro inválida.");
 
                 await SecureStorage.SetAsync("auth_token", registerResponse.Token);
-
                 return registerResponse;
             }
 
             var statusCode = (int)response.StatusCode;
             var errorContent = await response.Content.ReadAsStringAsync();
 
-            throw new Exception($"Backend Error ({statusCode}): {errorContent}");
+            if (statusCode == 409)
+            {
+
+                var message = ExtractErrorMessage(errorContent);
+                throw new Exception(message); 
+            }
+
+            throw new Exception($"Erro do servidor ({statusCode}): {errorContent}");
         }
         catch (Exception ex)
         {
-            throw new Exception("An error occurred while registering the user.", ex);
+            throw new Exception("Erro ao registrar usuário: " + ex.Message, ex);
         }
     }
+
 
     public async Task<CurrentUserDto> GetCurrentUserAsync()
     {
@@ -170,6 +177,23 @@ public class UserService : IUserService
         return await response.Content.ReadFromJsonAsync<UserResponseDto>()
                ?? throw new Exception("Resposta inesperada do servidor.");
     }
+
+    private string ExtractErrorMessage(string json)
+    {
+        try
+        {
+            var obj = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+            if (obj != null && obj.TryGetValue("message", out var message))
+                return message;
+
+            return "Erro desconhecido ao processar resposta.";
+        }
+        catch
+        {
+            return "Erro ao ler a mensagem de erro da resposta.";
+        }
+    }
+
 
 
 }
