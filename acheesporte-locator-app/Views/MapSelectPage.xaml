@@ -12,13 +12,11 @@
              Shell.TabBarIsVisible="False">
 
     <Grid>
-        <!-- Mapa como base (ZIndex 0) -->
         <maps:Map x:Name="MapControl"  
                   IsShowingUser="true"  
                   MapType="Hybrid"  
                   MapClicked="OnMapClicked" />
 
-        <!-- Sobreposição UI (ZIndex 1) -->
         <Grid RowSpacing="10"  
               Margin="0"  
               Padding="0"  
@@ -27,12 +25,9 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <!-- Espaço -->
                 <RowDefinition Height="Auto" />
-                <!-- Botão -->
             </Grid.RowDefinitions>
 
-            <!-- Botão fixado -->
             <Button Text="Confirmar Localização"  
                     Grid.Row="1"  
                     Clicked="OnConfirmClicked"  

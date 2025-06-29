@@ -1,78 +1,72 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"
-             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             x:Class="acheesporte_locator_app.Views.AddAvailableTimePage"
-             x:DataType="viewmodels:AddAvailableTimeViewModel"
-             BackgroundColor="#121212"
-             Shell.ForegroundColor="DeepPink"
-             Shell.NavBarIsVisible="True"
-             Title="Novo horário"
-             Shell.PresentationMode="Animated">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"  
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"  
+             x:Class="acheesporte_locator_app.Views.AddAvailableTimePage"  
+             x:DataType="viewmodels:AddAvailableTimeViewModel"  
+             BackgroundColor="#121212"  
+             Shell.ForegroundColor="DeepPink"  
+             Shell.NavBarIsVisible="True"  
+             Title="Novo horário"  
+             Shell.PresentationMode="Animated">  
 
-    <ScrollView>
-        <VerticalStackLayout Padding="24" Spacing="20">
+    <ScrollView>  
+        <VerticalStackLayout Padding="24" Spacing="20">  
 
-            <Label Text="Adicionar Novo Horário"
-                   TextColor="White"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   Margin="0,10,0,10"/>
+            <Label Text="Adicionar Novo Horário"  
+                   TextColor="White"  
+                   FontSize="22"  
+                   FontAttributes="Bold"  
+                   HorizontalOptions="Center"  
+                   Margin="0,10,0,10"/>  
 
-            <!-- Data -->
-            <Label Text="Selecione a data:"
-                   TextColor="White"
-                   FontSize="14"/>
-            <DatePicker Date="{Binding SelectedDate}"
-                        TextColor="White"
-                        BackgroundColor="#1e1e1e"
-                        MinimumDate="{x:Static sys:DateTime.Today}" />
+            <Label Text="Selecione a data:"  
+                   TextColor="White"  
+                   FontSize="14"/>  
+            <DatePicker Date="{Binding SelectedDate}"  
+                        TextColor="White"  
+                        BackgroundColor="#1e1e1e"  
+                        MinimumDate="{x:Static sys:DateTime.Today}" />  
 
-            <!-- Início -->
-            <Label Text="Selecione o horário de início:"
-                   TextColor="White"
-                   FontSize="14"/>
-            <TimePicker Time="{Binding SelectedStartTime}"
-                        TextColor="White"
-                        BackgroundColor="#1e1e1e"
-                        Format="HH:mm" />
+            <Label Text="Selecione o horário de início:"  
+                   TextColor="White"  
+                   FontSize="14"/>  
+            <TimePicker Time="{Binding SelectedStartTime}"  
+                        TextColor="White"  
+                        BackgroundColor="#1e1e1e"  
+                        Format="HH:mm" />  
 
-            <!-- Fim -->
-            <Label Text="Selecione o horário de término:"
-                   TextColor="White"
-                   FontSize="14"/>
-            <TimePicker Time="{Binding SelectedEndTime}"
-                        TextColor="White"
-                        BackgroundColor="#1e1e1e"
-                        Format="HH:mm"/>
+            <Label Text="Selecione o horário de término:"  
+                   TextColor="White"  
+                   FontSize="14"/>  
+            <TimePicker Time="{Binding SelectedEndTime}"  
+                        TextColor="White"  
+                        BackgroundColor="#1e1e1e"  
+                        Format="HH:mm"/>  
 
-            <!-- Preço -->
-            <Label Text="Preço:"
-                   TextColor="White"
-                   FontSize="14"/>
-            <Entry Placeholder="Preço (ex: 50)"
-                   Text="{Binding Price}"
-                   TextColor="White"
-                   Keyboard="Numeric"
-                   BackgroundColor="#1e1e1e"
-                   PlaceholderColor="Gray" />
+            <Label Text="Preço:"  
+                   TextColor="White"  
+                   FontSize="14"/>  
+            <Entry Placeholder="Preço (ex: 50)"  
+                   Text="{Binding Price}"  
+                   TextColor="White"  
+                   Keyboard="Numeric"  
+                   BackgroundColor="#1e1e1e"  
+                   PlaceholderColor="Gray" />  
 
-            <!-- Botão -->
-            <Button Text="Criar Horário"
-                    TextColor="White"
-                    BackgroundColor="DeepPink"
-                    CornerRadius="12"
-                    HeightRequest="50"
-                    Command="{Binding CreateAvailabilityCommand}"
-                    IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}" />
+            <Button Text="Criar Horário"  
+                    TextColor="White"  
+                    BackgroundColor="DeepPink"  
+                    CornerRadius="12"  
+                    HeightRequest="50"  
+                    Command="{Binding CreateAvailabilityCommand}"  
+                    IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}" />  
 
-            <!-- Loader opcional -->
-            <ActivityIndicator IsRunning="{Binding IsLoading}"
-                               IsVisible="{Binding IsLoading}"
-                               Color="White"
-                               HeightRequest="40"
-                               Margin="0,10"/>
-        </VerticalStackLayout>
-    </ScrollView>
+            <ActivityIndicator IsRunning="{Binding IsLoading}"  
+                               IsVisible="{Binding IsLoading}"  
+                               Color="White"  
+                               HeightRequest="40"  
+                               Margin="0,10"/>  
+        </VerticalStackLayout>  
+    </ScrollView>  
 </ContentPage>

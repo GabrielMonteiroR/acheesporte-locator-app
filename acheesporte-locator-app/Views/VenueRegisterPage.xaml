@@ -13,14 +13,12 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
 
-            <!-- Nome -->
             <Label Text="Nome do Local" TextColor="#CCCCCC" />
             <Entry Placeholder="Ex: Arena Society"  
                    Text="{Binding Name}"  
                    BackgroundColor="AliceBlue"  
                    TextColor="DarkSlateGrey" />
 
-            <!-- CEP + Buscar -->
             <Label Text="CEP" TextColor="#CCCCCC" />
             <Entry Placeholder="00000000"
        Text="{Binding PostalCode, Mode=TwoWay}"
@@ -32,7 +30,6 @@
 
 
 
-            <!-- Endereço -->
             <Label Text="Rua" TextColor="#CCCCCC" />
             <Entry Text="{Binding Street}" Placeholder="Rua" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
 
@@ -51,7 +48,6 @@
             <Label Text="Estado" TextColor="#CCCCCC" />
             <Entry Text="{Binding State}" Placeholder="Estado" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
 
-            <!-- Descrição -->
             <Label Text="Descrição" TextColor="#CCCCCC" />
             <Editor Placeholder="Ex: Quadra com grama sintética e iluminação noturna"  
                     Text="{Binding Description}"  
@@ -59,11 +55,9 @@
                     BackgroundColor="AliceBlue"  
                     TextColor="DarkSlateGrey" />
 
-            <!-- Capacidade -->
             <Label Text="Capacidade (nº de pessoas)" TextColor="#CCCCCC" />
             <Entry Text="{Binding Capacity}" Keyboard="Numeric" BackgroundColor="AliceBlue" TextColor="DarkSlateGrey"/>
 
-            <!-- Regras -->
             <Label Text="Regras do Local" TextColor="#CCCCCC" />
             <Editor Text="{Binding Rules}"  
                     Placeholder="Ex: Obrigatório uso de tênis"  
@@ -71,7 +65,6 @@
                     BackgroundColor="AliceBlue"  
                     TextColor="DarkSlateGrey" />
 
-            <!-- Tipo de local (Picker) -->
             <Label Text="Tipo de Local" TextColor="#CCCCCC" />
             <Picker ItemsSource="{Binding VenueTypes}"  
                     ItemDisplayBinding="{Binding Name}"  
@@ -80,14 +73,12 @@
                     TextColor="DarkSlateGrey"  
                     Title="Selecione o tipo de local" />
 
-            <!-- Localização -->
             <Button Text="Selecionar Localização no Mapa"  
                     Command="{Binding SelectLocationOnMapCommand}"  
                     BackgroundColor="#3730A3"  
                     TextColor="White"  
                     CornerRadius="8" />
 
-            <!-- Imagens -->
             <Button Text="Selecionar Imagens"  
                     Command="{Binding SelecionarImagensCommand}"  
                     BackgroundColor="#555"  
@@ -111,7 +102,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- Botão de Cadastrar -->
             <Button Text="Cadastrar Local"  
                     Command="{Binding RegisterVenueCommand}"  
                     BackgroundColor="Green"  
@@ -120,7 +110,6 @@
                     FontAttributes="Bold"  
                     HeightRequest="50" />
 
-            <!-- Loading -->
             <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="White" />
 
         </VerticalStackLayout>

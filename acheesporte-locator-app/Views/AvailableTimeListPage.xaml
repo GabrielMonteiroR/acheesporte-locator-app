@@ -16,7 +16,6 @@
             <RowDefinition Height="*"/>  
         </Grid.RowDefinitions>  
 
-        <!-- Listagem -->  
         <Grid Grid.Row="1">  
             <CollectionView ItemsSource="{Binding AvailabilityTimes}"  
                             IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBoolConverter}}"  

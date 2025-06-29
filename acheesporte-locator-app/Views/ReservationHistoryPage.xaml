@@ -33,7 +33,6 @@
                                 BackgroundColor="Ivory">
 
                             <HorizontalStackLayout Spacing="12">
-                                <!-- Avatar -->
                                 <Frame Padding="0"
                                        HeightRequest="60"
                                        WidthRequest="60"
@@ -44,7 +43,6 @@
                                            Aspect="AspectFill" />
                                 </Frame>
 
-                                <!-- Detalhes -->
                                 <VerticalStackLayout Spacing="2">
                                     <Label Text="{Binding User.FullName, StringFormat='Reservado por {0}'}"
                                            FontSize="15"

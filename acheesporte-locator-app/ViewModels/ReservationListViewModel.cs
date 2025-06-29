@@ -6,10 +6,6 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace acheesporte_locator_app.ViewModels;
 
-/// <summary>
-/// Exibe todas as reservas de um determinado local (Venue).
-/// A página recebe <c>venueId</c> pela rota.
-/// </summary>
 [QueryProperty(nameof(VenueId), "venueId")]
 public partial class ReservationListViewModel : ObservableObject
 {
