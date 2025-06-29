@@ -5,4 +5,6 @@ namespace acheesporte_locator_app.Interfaces;
 public interface IReservationService
 {
     Task<List<ReservationResponseDto>> GetReservationsByVenueIdAsync(int venueId);
+    Task<List<ReservationResponseDto>> GetReservationHistoryByVenueIdAsync(int venueId);
+
 }

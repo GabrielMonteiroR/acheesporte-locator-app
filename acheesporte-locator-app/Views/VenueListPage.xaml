@@ -5,8 +5,9 @@
              x:DataType="viewmodels:VenueViewModel" 
              xmlns:venueDtos="clr-namespace:acheesporte_locator_app.Dtos.VenueDtos"
              BackgroundColor="#121212"  
-             Shell.NavBarIsVisible="False"  
-             Shell.PresentationMode="Animated">
+             Shell.NavBarIsVisible="True"  
+             Shell.PresentationMode="Animated"
+             Title="Meus Locais">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -14,22 +15,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Padding="24,4,4,4" HeightRequest="100">
-            <Label Text="Meus Locais"  
-                   FontSize="22"  
-                   FontAttributes="Bold"  
-                   TextColor="DeepPink"  
-                   VerticalOptions="Center"  
-                   HorizontalOptions="Start" />
-        </Grid>
-
         <Grid Grid.Row="1">
             <CollectionView ItemsSource="{Binding Venues}"  
                             IsVisible="{Binding IsEmpty, Converter={StaticResource InverseBoolConverter}}"  
                             SelectionMode="None"  
                             Margin="0,10">
                 <CollectionView.EmptyView>
-                    <Label Text="Nenhum local encontrado."  
+                    <Label Text=""  
                            HorizontalOptions="Center"  
                            TextColor="White"  
                            FontAttributes="Italic"  

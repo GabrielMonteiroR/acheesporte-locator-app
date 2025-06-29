@@ -43,11 +43,6 @@
             <Label Text="Regras" TextColor="White"/>
             <Editor Text="{Binding Rules}" AutoSize="TextChanges" BackgroundColor="AliceBlue" TextColor="Black"/>
 
-            <Label Text="Latitude" TextColor="White"/>
-            <Entry Text="{Binding Latitude}" IsReadOnly="True" BackgroundColor="AliceBlue" TextColor="Black"/>
-
-            <Label Text="Longitude" TextColor="White"/>
-            <Entry Text="{Binding Longitude}" IsReadOnly="True" BackgroundColor="AliceBlue" TextColor="Black"/>
 
             <Button Text="Selecionar Novas Imagens"
                     Command="{Binding SelecionarImagensCommand}"
@@ -74,7 +69,7 @@
 
             <Button Text="Salvar Alterações"
                     Command="{Binding UpdateVenueCommand}"
-                    BackgroundColor="Green"
+                    BackgroundColor="DeepPink"
                     TextColor="White"
                     CornerRadius="12"
                     FontAttributes="Bold"

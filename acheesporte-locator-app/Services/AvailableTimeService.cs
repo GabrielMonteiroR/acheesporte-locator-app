@@ -52,7 +52,6 @@ public class AvailableTimesService : IAvailableTimesService
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var json = JsonSerializer.Serialize(dto);
-        await Shell.Current.DisplayAlert("JSON ENVIADO", json, "OK");
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         var url = $"{_apiSettings.BaseUrl}{_apiSettings.CreateAvailableTimesEndpoint}";

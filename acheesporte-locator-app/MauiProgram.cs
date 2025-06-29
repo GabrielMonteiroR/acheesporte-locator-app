@@ -53,6 +53,10 @@ public static class MauiProgram
         builder.Services.AddTransient<ReservationListPage>();
         builder.Services.AddTransient<ReservationListViewModel>();
         builder.Services.AddTransient<VenueReservationListPage>();
+        builder.Services.AddTransient<ReservationHistoryViewModel>();
+        builder.Services.AddTransient<ReservationHistoryPage>();
+        builder.Services.AddTransient<ReservationHistoryViewModel>();
+        builder.Services.AddTransient<VenueHistoryListPage>();
 
         builder.Services.AddHttpClient<VenueService>(client =>
         {

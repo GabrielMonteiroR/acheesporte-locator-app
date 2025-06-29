@@ -38,4 +38,27 @@ public class ReservationService : IReservationService
         var dto = await response.Content.ReadFromJsonAsync<ReservationsResponseDto>();
         return dto?.Reservations ?? new List<ReservationResponseDto>();
     }
+
+    public async Task<List<ReservationResponseDto>> GetReservationHistoryByVenueIdAsync(int venueId)
+    {
+        var token = await SecureStorage.GetAsync("auth_token");
+        if (string.IsNullOrWhiteSpace(token))
+            throw new UnauthorizedAccessException("Token não encontrado. Faça login novamente.");
+
+        var url = $"{_apiSettings.BaseUrl}{_apiSettings.GetHistoryByVenueIdEndpoint}{venueId}";
+
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        var response = await _httpClient.SendAsync(request);
+        if (!response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Erro ao buscar histórico: {content}");
+        }
+
+        var dto = await response.Content.ReadFromJsonAsync<ReservationsResponseDto>();
+        return dto?.Reservations ?? new List<ReservationResponseDto>();
+    }
+
 }

@@ -57,7 +57,6 @@ public partial class AddAvailableTimeViewModel : ObservableObject
                 ReservedTimes.Add(item);
 
             var timesSummary = string.Join("\n", list.Select(t => $"Start: {t.StartDate}, End: {t.EndDate}, Price: {t.Price}"));
-            await Shell.Current.DisplayAlert("HORÁRIOS CARREGADOS:", timesSummary, "OK");
         }
         catch (Exception ex)
         {

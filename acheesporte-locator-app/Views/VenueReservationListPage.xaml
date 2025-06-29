@@ -6,8 +6,10 @@
              x:Class="acheesporte_locator_app.Views.VenueReservationListPage"  
              x:DataType="viewmodels:VenueViewModel"  
              BackgroundColor="#121212"  
-             Shell.NavBarIsVisible="False"  
-             Shell.PresentationMode="Animated">  
+             Shell.NavBarIsVisible="True"  
+             Shell.PresentationMode="Animated"
+             Title="Reservas"
+>  
 
     <Grid>  
         <Grid.RowDefinitions>  
@@ -16,11 +18,6 @@
         </Grid.RowDefinitions>  
 
         <Grid Grid.Row="0" Padding="24,4">  
-            <Label Text="Meus Locais"  
-                   FontSize="22"  
-                   FontAttributes="Bold"  
-                   TextColor="DeepPink"  
-                   VerticalOptions="Center"/>  
         </Grid>  
 
         <CollectionView Grid.Row="1"  
@@ -30,7 +27,7 @@
                         Margin="0,10">  
 
             <CollectionView.EmptyView>  
-                <Label Text="Nenhum local encontrado."  
+                <Label Text=""  
                        HorizontalOptions="Center"  
                        TextColor="White"  
                        FontAttributes="Italic"  
@@ -76,6 +73,12 @@
                     </Border>  
                 </DataTemplate>  
             </CollectionView.ItemTemplate>  
-        </CollectionView>  
+        </CollectionView>
+        <ActivityIndicator  
+    IsRunning="{Binding IsLoading}"  
+    IsVisible="{Binding IsLoading}"  
+    Color="DeepPink"  
+    HorizontalOptions="Center"  
+    VerticalOptions="Center" />
     </Grid>  
 </ContentPage>

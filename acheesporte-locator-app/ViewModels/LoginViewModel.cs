@@ -64,7 +64,7 @@ public partial class LoginViewModel : ObservableObject
 
 
             Application.Current.MainPage = App.Services.GetService<AppShell>();
-            await Shell.Current.GoToAsync("//MainApp/HomePage");
+            await Shell.Current.GoToAsync("//MainApp/VenueReservationListPage");
         }
         catch
         {

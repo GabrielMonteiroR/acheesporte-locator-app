@@ -5,24 +5,16 @@
              x:Class="acheesporte_locator_app.Views.AvailableTimeListPage"  
              x:DataType="viewmodels:AvailableTimeListViewModel"  
              BackgroundColor="#121212"  
-             Shell.NavBarIsVisible="False"  
-             Shell.PresentationMode="Animated">  
+             Shell.NavBarIsVisible="True"
+             Shell.ForegroundColor="DeepPink"
+             Shell.PresentationMode="Animated"
+             Title="Horários disponíveis">  
 
     <Grid>  
         <Grid.RowDefinitions>  
             <RowDefinition Height="Auto"/>  
             <RowDefinition Height="*"/>  
         </Grid.RowDefinitions>  
-
-        <!-- Header -->  
-        <Grid Padding="24,4,4,4" HeightRequest="100">  
-            <Label Text="Horários Disponíveis"  
-                   FontSize="22"  
-                   FontAttributes="Bold"  
-                   TextColor="DeepPink"  
-                   VerticalOptions="Center"  
-                   HorizontalOptions="Start"/>  
-        </Grid>  
 
         <!-- Listagem -->  
         <Grid Grid.Row="1">  

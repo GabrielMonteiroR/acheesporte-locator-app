@@ -4,12 +4,11 @@
              x:Class="acheesporte_locator_app.Views.VenueRegisterPage"  
              x:DataType="viewmodels:VenueFormViewModel"  
              BackgroundColor="#121212"  
-             Shell.NavBarIsVisible="True"  
+             Shell.NavBarIsVisible="True" 
              Shell.BackgroundColor="#121212"  
              Shell.TitleColor="DeepPink"  
              Shell.ForegroundColor="DeepPink"  
-             Title="Cadastrar novo Local"  
-             Shell.TabBarIsVisible="False">
+             Title="Cadastrar novo Local" >
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">

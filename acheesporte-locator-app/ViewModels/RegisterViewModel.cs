@@ -151,13 +151,12 @@ public partial class RegisterViewModel : ObservableObject, INotifyDataErrorInfo
             UserSession.CurrentUser = currentUser;
 
             Application.Current.MainPage = new AppShell();
-            await Shell.Current.GoToAsync("//MainApp/HomePage");
+            await Shell.Current.GoToAsync("//MainApp/VenueReservationListPage");
         }
         catch (Exception ex)
         {
             var error = ex.InnerException?.Message ?? ex.Message;
 
-            // Trata possíveis erros de conflito retornados do backend (409)
             if (error.Contains("já está em uso"))
             {
                 await Application.Current.MainPage.DisplayAlert("Erro de cadastro", error, "OK");

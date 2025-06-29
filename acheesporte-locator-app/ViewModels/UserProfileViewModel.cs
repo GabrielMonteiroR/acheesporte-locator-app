@@ -1,5 +1,6 @@
 ﻿using acheesporte_athlete_app.Services;
 using acheesporte_locator_app.Dtos.Users;
+using acheesporte_locator_app.Helpers;
 using acheesporte_locator_app.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -56,7 +57,6 @@ public partial class UserProfileViewModel : ObservableObject
             Phone = user.Phone;
             ProfileImageUrl = user.ProfileImageUrl;
 
-            await Shell.Current.DisplayAlert("Usuário", $"Bem-vindo, {user.FirstName}", "OK");
         }
         catch (Exception ex)
         {
@@ -101,6 +101,23 @@ public partial class UserProfileViewModel : ObservableObject
             IsLoading = false;
         }
     }
+
+    [RelayCommand]
+    private async Task LogoutAsync()
+    {
+        var confirm = await Application.Current.MainPage.DisplayAlert(
+            "Sair", "Deseja realmente sair da conta?", "Sim", "Cancelar");
+
+        if (!confirm) return;
+
+        SecureStorage.Remove("auth_token");        
+
+        UserSession.CurrentUser = null;
+
+        await Shell.Current.GoToAsync("//LoginPage");
+    }
+
+
 
     [RelayCommand]
     public async Task SaveAsync()

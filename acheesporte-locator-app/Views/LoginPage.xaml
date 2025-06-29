@@ -3,73 +3,71 @@
              xmlns:viewmodels="clr-namespace:acheesporte_locator_app.ViewModels"  
              x:Class="acheesporte_locator_app.Views.LoginPage"  
              x:DataType="viewmodels:LoginViewModel"  
-             BackgroundColor="#121212"
+             BackgroundColor="#121212"  
              Shell.NavBarIsVisible="False"  
              Shell.PresentationMode="Animated"  
-             NavigationPage.HasNavigationBar="False">  
-    <Grid>  
-        <Grid.RowDefinitions>  
-            <RowDefinition Height="Auto" />  
-            <RowDefinition Height="2*" />  
-        </Grid.RowDefinitions>  
+             NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
 
-        <!-- Topo com logo e título -->  
-        <Grid Grid.Row="0" Padding="24,4,4,4" HeightRequest="180">  
-            <Grid.ColumnDefinitions>  
-                <ColumnDefinition Width="*" />  
-                <ColumnDefinition Width="Auto" />  
-            </Grid.ColumnDefinitions>  
+        <!-- Topo com logo e título -->
+        <Grid Grid.Row="0" Padding="24,4,4,4" HeightRequest="180">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
             <Image Source="logo_achesporte.png"  
                    HeightRequest="68" WidthRequest="68"  
                    VerticalOptions="Start" HorizontalOptions="End"  
-                   Grid.Column="1" Margin="4" />  
+                   Grid.Column="1" Margin="4" />
 
             <StackLayout VerticalOptions="Start" HorizontalOptions="Start" Spacing="0"  
-                         Grid.Column="0" Margin="0,64,0,0">  
-                <Label Text="Bem-vindo," FontSize="28" FontAttributes="Bold" TextColor="#E94560" />  
-                <Label Text="Locador!" FontSize="32" FontAttributes="Bold" TextColor="AliceBlue" />  
+                         Grid.Column="0" Margin="0,64,0,0">
+                <Label Text="Bem-vindo," FontSize="28" FontAttributes="Bold" TextColor="#E94560" />
+                <Label Text="Locador!" FontSize="32" FontAttributes="Bold" TextColor="AliceBlue" />
                 <Label Text="Insira seu e-mail e senha para acessar sua conta."  
-                       FontSize="16" TextColor="#A6A6A6" />  
-            </StackLayout>  
-        </Grid>  
+                       FontSize="16" TextColor="#A6A6A6" />
+            </StackLayout>
+        </Grid>
 
-        <!-- Formulário de login -->  
+        <!-- Formulário de login -->
         <Border Grid.Row="1"  
                 BackgroundColor="White"  
                 StrokeShape="RoundRectangle 24"  
                 Padding="24,44,24,24"  
                 VerticalOptions="End"  
-                Stroke="Transparent">  
+                Stroke="Transparent">
             <VerticalStackLayout Spacing="20">
 
-
-                <Border BackgroundColor="White"
-        Stroke="#DDDDDD"
-        HeightRequest="48"
-        Padding="12,0"
-        Margin="0,10,0,0">
-
+                <Border BackgroundColor="White"  
+                        Stroke="#DDDDDD"  
+                        HeightRequest="48"  
+                        Padding="12,0"  
+                        Margin="0,10,0,0">
                     <HorizontalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
                         <Image Source="google.svg" HeightRequest="24" WidthRequest="24" />
-                        <Label Text="Entrar com Google"
-               TextColor="#E94560"
-               FontAttributes="Bold"
-               VerticalOptions="Center" />
+                        <Label Text="Entrar com Google"  
+                               TextColor="#E94560"  
+                               FontAttributes="Bold"  
+                               VerticalOptions="Center" />
                     </HorizontalStackLayout>
                 </Border>
 
-                <!-- Campos de login -->  
-                <Label Text="Email" FontSize="14" TextColor="#E94560" FontAttributes="Bold" />  
+                <!-- Campos de login -->
+                <Label Text="Email" FontSize="14" TextColor="#E94560" FontAttributes="Bold" />
                 <Entry Placeholder="Insira seu Email"  
                        Keyboard="Email"  
                        TextColor="Black"  
                        PlaceholderColor="#888"  
                        BackgroundColor="White"  
                        Margin="0,0,0,0"  
-                       Text="{Binding Email}" />  
+                       Text="{Binding Email}" />
 
-                <Label Text="Senha" FontSize="14" TextColor="#E94560" FontAttributes="Bold" />  
+                <Label Text="Senha" FontSize="14" TextColor="#E94560" FontAttributes="Bold" />
                 <Entry Placeholder="Insira sua senha"  
                        IsPassword="True"  
                        TextColor="Black"  
@@ -78,39 +76,35 @@
                        Margin="0,0,0,0"  
                        Text="{Binding Password}" />
 
-                <Button Text="Entrar"
-                        Margin="0,0,0,0"
-                        BackgroundColor="#E94560"
-                        TextColor="White"
-                        CornerRadius="12"
-                        HeightRequest="48"
-                        FontAttributes="Bold"
-                        BorderColor="Transparent"
-                        Command="{Binding LoginCommand}"
+                <Button Text="Entrar"  
+                        Margin="0,0,0,0"  
+                        BackgroundColor="#E94560"  
+                        TextColor="White"  
+                        CornerRadius="12"  
+                        HeightRequest="48"  
+                        FontAttributes="Bold"  
+                        BorderColor="Transparent"  
+                        Command="{Binding LoginCommand}"  
                         IsEnabled="{Binding IsNotBusy}" />
 
+                <!-- Activity Indicator -->
+                <ActivityIndicator IsRunning="{Binding IsBusy}"  
+                                   IsVisible="{Binding IsBusy}"  
+                                   Color="#E94560"  
+                                   HorizontalOptions="Center"  
+                                   VerticalOptions="Center" />
 
-
-                <!-- Link para cadastro -->  
-                <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">  
-                    <Label Text="Não tem uma conta?" TextColor="#E94560" VerticalOptions="Center" />  
+                <!-- Link para cadastro -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                    <Label Text="Não tem uma conta?" TextColor="#E94560" VerticalOptions="Center" />
                     <Button Text="Cadastre-se"  
                             BackgroundColor="Transparent"  
                             TextColor="#0F3460"  
                             Padding="0"  
-                            Command="{Binding NavigateToRegisterCommand}" />  
-                </HorizontalStackLayout>  
+                            Command="{Binding NavigateToRegisterCommand}" />
+                </HorizontalStackLayout>
 
-            </VerticalStackLayout>  
+            </VerticalStackLayout>
         </Border>
-        <ActivityIndicator 
-    IsRunning="{Binding IsBusy}" 
-    IsVisible="{Binding IsBusy}" 
-    VerticalOptions="Center" 
-    HorizontalOptions="Center" 
-    Color="#E94560" 
-    WidthRequest="48" 
-    HeightRequest="48"/>
-
-    </Grid>  
+    </Grid>
 </ContentPage>

@@ -40,7 +40,7 @@ public partial class SplashPage : ContentPage
             {
                 UserSession.CurrentUser = user;
                 Application.Current.MainPage = App.Services.GetService<AppShell>();
-                await Shell.Current.GoToAsync("//MainApp/HomePage");
+                await Shell.Current.GoToAsync("//MainApp/VenueReservationListPage");
             }
             else
             {

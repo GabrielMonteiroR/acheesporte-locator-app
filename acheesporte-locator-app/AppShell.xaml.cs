@@ -19,13 +19,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("EditAvailableTimePage", typeof(EditAvailableTimePage));
         Routing.RegisterRoute("UserProfilePage", typeof(UserProfilePage));
         Routing.RegisterRoute("ReservationListPage", typeof(ReservationListPage));
-
-        //Routing.RegisterRoute("TestPage", typeof(TestPage));
-
-        // Routing.RegisterRoute("loading", typeof(LoadingPage));
-        Routing.RegisterRoute("HomePage", typeof(HomePage));
-        // Routing.RegisterRoute("HistoryPage", typeof(Views.History.HistoryPage));
-        // Routing.RegisterRoute("ReservationPage", typeof(ReservationPage));
+        Routing.RegisterRoute(nameof(ReservationHistoryPage), typeof(ReservationHistoryPage));
 
     }
 }

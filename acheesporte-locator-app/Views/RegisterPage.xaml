@@ -5,6 +5,7 @@
              xmlns:converters="clr-namespace:acheesporte_locator_app.Converters"
              x:Class="acheesporte_locator_app.Views.RegisterPage"
              NavigationPage.HasBackButton="True"
+             NavigationPage.IconColor="DeepPink"
              NavigationPage.BackButtonTitle="Voltar"
              BackgroundColor="#121212">
 
@@ -28,7 +29,7 @@
        FontSize="24"
        FontAttributes="Bold"
        HorizontalTextAlignment="Center"
-       TextColor="White" />
+       TextColor="Black" />
 
                 <Label Text="Cadastre-se!"
                        FontSize="24"
@@ -37,7 +38,7 @@
                        HorizontalTextAlignment="Center" />
                 <Label Text="Preencha os dados para criar sua conta."
                        FontSize="12"
-                       TextColor="#D1C4E9"
+                       TextColor="Black"
                        HorizontalTextAlignment="Center" />
             </StackLayout>
         </Grid>

@@ -6,6 +6,8 @@
     xmlns:main="clr-namespace:acheesporte_locator_app.Views"  
     xmlns:test="clr-namespace:acheesporte_locator_app.Views"
     xmlns:history="clr-namespace:acheesporte_locator_app.Views"  
+    Shell.TitleColor="DeepPink"
+    Shell.BackgroundColor="#121212"
 
     Shell.TabBarBackgroundColor="#121212"  
     Shell.TabBarForegroundColor="DeepPink"  
@@ -19,12 +21,6 @@
     <!-- <ShellContent Route="LoadingPage" ContentTemplate="{DataTemplate shared:LoadingPage}" /> -->
 
     <TabBar Route="MainApp">
-        <ShellContent 
-        Title="Início"
-        Route="HomePage"
-        Icon="home.png"
-        ContentTemplate="{DataTemplate main:HomePage}" />
-
         <ShellContent
             Title="Reservas"
             Route="VenueReservationListPage"
@@ -39,9 +35,9 @@
 
         <ShellContent
     Title="Histórico"
-    Route="TestPage"
+    Route="VenueHistoryListPage"
     Icon="history.png"
-    ContentTemplate="{DataTemplate main:HomePage}"/>
+    ContentTemplate="{DataTemplate main:VenueHistoryListPage}"/>
 
         <ShellContent
      Title="Perfil"

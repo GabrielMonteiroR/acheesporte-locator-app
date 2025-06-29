@@ -68,19 +68,12 @@ public class VenueService : IVenueService
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
             var url = $"{_apiSettings.BaseUrl}{_apiSettings.CreateVenuesEndpoint}";
-            await Shell.Current.DisplayAlert("Endpoint URL", $"The URL is: {url}", "OK");
 
             var json = JsonSerializer.Serialize(dto);
-            await Shell.Current.DisplayAlert("JSON Enviado", json, "OK");
 
             var response = await _httpClient.PostAsJsonAsync(url, dto);
 
             var responseContent = await response.Content.ReadAsStringAsync();
-
-            await Shell.Current.DisplayAlert("Response",
-                $"Status: {(int)response.StatusCode}\n\n{responseContent}",
-                "OK");
-
 
             if (!response.IsSuccessStatusCode)
             {

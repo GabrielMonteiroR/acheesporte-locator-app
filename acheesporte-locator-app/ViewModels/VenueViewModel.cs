@@ -81,6 +81,18 @@ public partial class VenueViewModel : ObservableObject
     }
 
     [RelayCommand]
+    public async Task GoToHistoryAsync(int venueId)
+    {
+        if (venueId <= 0) return;
+
+        await Shell.Current.GoToAsync(nameof(ReservationHistoryPage), true, new Dictionary<string, object>
+    {
+        { "venueId", venueId }
+    });
+    }
+
+
+    [RelayCommand]
     private async Task GoToReservationsAsync(int venueId)
     {
         if (venueId <= 0) return;
